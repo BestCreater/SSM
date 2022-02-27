@@ -14,6 +14,7 @@ public interface UserService {
 
     int updateUser(int user_id,String status);
     int revisePwd(User user);
+    int onlineStatus(User user);
 
     int updateRole(User user);
 

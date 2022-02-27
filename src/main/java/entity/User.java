@@ -18,5 +18,6 @@ public class User {
     private int role_id;
     private String role_name;
     private String status;
+    private String online_status;
 
 }

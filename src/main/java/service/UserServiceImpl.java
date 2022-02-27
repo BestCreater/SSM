@@ -42,7 +42,12 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public User login(User user) {
-        return this.userMapper.login(user);
+        User userLogin=this.userMapper.login(user);
+        if (userLogin!=null&&"on".equals(userLogin.getStatus())){
+            userLogin.setOnline_status("在线");
+            this.userMapper.onlineStatus(userLogin);
+        }
+        return userLogin;
     }
 
     @Override
@@ -58,6 +63,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int revisePwd(User user) {
         return this.userMapper.revisePwd(user);
+    }
+
+    @Override
+    public int onlineStatus(User user) {
+        return this.userMapper.onlineStatus(user);
     }
 
     @Override

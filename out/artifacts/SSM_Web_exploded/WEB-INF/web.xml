@@ -43,4 +43,7 @@
         <session-timeout>15</session-timeout>
     </session-config>
 
+    <listener>
+        <listener-class>listener.SessionCounter</listener-class>
+    </listener>
 </web-app>

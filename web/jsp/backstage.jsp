@@ -279,6 +279,9 @@
                     onclick="pageChange('用户管理','${pageContext.request.contextPath}/user/mainUser')"><a
                         href="${pageContext.request.contextPath}/user/mainUser"
                         target="content">用户管理</a></li>
+                <li onclick="pageChange('登录日志','${pageContext.request.contextPath}/log/mainLog')"><a
+                        href="${pageContext.request.contextPath}/log/mainLog" target="content">登录日志</a>
+                </li>
                 <li onclick="pageChange('通知管理','${pageContext.request.contextPath}/NoticeServlet?method=mainNotice')"><a
                         href="${pageContext.request.contextPath}/NoticeServlet?method=mainNotice"
                         target="content">通知管理</a></li>
@@ -295,7 +298,7 @@
                     <img src="${pageContext.request.contextPath}/img/user.jpg">
                     <li>${user.username}
                         <ul class="abc">
-                            <li><a href="${pageContext.request.contextPath}/UserServlet?method=logout">退出登录</a></li>
+                            <li><a href="${pageContext.request.contextPath}/user/logout">退出登录</a></li>
                             <li onclick="pageChange('修改密码','${pageContext.request.contextPath}/user/revisePwd')"><a
                                     href="${pageContext.request.contextPath}/user/revisePwd"
                                     target="content">修改密码</a></li>

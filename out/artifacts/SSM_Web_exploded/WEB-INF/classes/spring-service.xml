@@ -6,7 +6,6 @@
    http://www.springframework.org/schema/beans/spring-beans.xsd
    http://www.springframework.org/schema/context
    http://www.springframework.org/schema/context/spring-context.xsd">
-
     <!-- 扫描service相关的bean -->
     <context:component-scan base-package="service" />
 
@@ -16,6 +15,9 @@
     </bean>
     <bean id="StaffServiceImpl" class="service.StaffServiceImpl">
         <property name="staffMapper" ref="staffMapper"/>
+    </bean>
+    <bean id="LogServiceImpl" class="service.LogServiceImpl">
+        <property name="logMapper" ref="logMapper"/>
     </bean>
 
     <!-- 配置事务管理器 -->

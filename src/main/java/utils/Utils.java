@@ -1,5 +1,6 @@
 package utils;
 
+import com.alibaba.fastjson.JSONObject;
 import entity.Dept;
 import entity.Salary;
 import entity.Staff;
@@ -10,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class Utils {
 
@@ -40,6 +42,10 @@ public class Utils {
         return stringTime;
     }
 
+    public static String transDate(Date date){
+        SimpleDateFormat st=new SimpleDateFormat();
+        return st.format(date);
+    }
     public static Date transTime(String date) {//格林威治时间字符串转为Date类型时间
         SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss", Locale.ENGLISH);
         Date dateTrans = null;
@@ -60,6 +66,9 @@ public class Utils {
         return sqlDate;
     }
 
+    public static String subDate(String date){
+        return date.substring(0,date.indexOf("."));
+    }
     //    public static  String transTimestamp(Timestamp date) throws ParseException {
 //        DateFormat sdf = new SimpleDateFormat();
 //        String time=sdf.format(date);
@@ -96,5 +105,10 @@ public class Utils {
             }
         }
         return null;
+    }
+    public static String address(String ip){
+        String st=Http.sendGet("https://ip.ws.126.net/ipquery",ip);
+        Map<String,Object> ads= JSONObject.parseObject(st);
+        return ads.get("province").toString()+ads.get("city").toString();
     }
 }

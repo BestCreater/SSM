@@ -301,13 +301,14 @@
             <th>用户类型</th>
             <th>账号状态</th>
             <th>注册时间</th>
+            <th>在线状态</th>
             <th class="operation">操作</th>
         </tr>
         </thead>
         <tbody id="content">
         <c:forEach items="${userList}" var="user" varStatus="status">
             <tr align="center">
-                <td>${status.index+1}</td>
+                <td>${(page.nowPage-1)*10+status.index+1}</td>
                 <td>${user.username}</td>
                 <td>${user.role_name}</td>
                 <c:if test="${user.status=='on'}">
@@ -317,6 +318,12 @@
                     <td><input id="${user.status}${user.user_id}" class="switch switch-anim" type="checkbox" onclick="updateUser('${user.user_id}','${user.username}','${user.role_name}','${user.status}')" ></td>
                 </c:if>
                 <td>${user.register_time}</td>
+                <c:if test="${user.online_status=='在线'}">
+                    <td style="color: #64bd63">${user.online_status}</td>
+                </c:if>
+                <c:if test="${user.online_status=='离线'}">
+                    <td>${user.online_status}</td>
+                </c:if>
                 <td class="delete">
                     <a href="javascript:openUser('${user.user_id}','${user.username}','${user.role_name}')">权限</a>
                 </td>

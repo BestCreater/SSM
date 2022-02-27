@@ -16,7 +16,9 @@
     <bean id="StaffServiceImpl" class="service.StaffServiceImpl">
         <property name="staffMapper" ref="staffMapper"/>
     </bean>
-    <bean id="TestServiceImpl" class="service.TestServiceImpl"/>
+    <bean id="LogServiceImpl" class="service.LogServiceImpl">
+        <property name="logMapper" ref="logMapper"/>
+    </bean>
 
     <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

@@ -1,5 +1,6 @@
 
 import com.alibaba.fastjson.JSONObject;
+import entity.LogLogin;
 import entity.Staff;
 import entity.User;
 import org.junit.Test;
@@ -7,12 +8,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;
-import service.StaffService;
-import service.StaffServiceImpl;
-import service.UserService;
-import service.UserServiceImpl;
+import service.*;
+import utils.Http;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -90,12 +91,14 @@ public class MyTest {
         ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
         UserService userService =(UserService)context.getBean("UserServiceImpl");
         StaffService staffService=(StaffService)context.getBean("StaffServiceImpl");
+        LogService logService=(LogService)context.getBean("LogServiceImpl");
+        System.out.println(logService.pageLog(null,1));
         User user=new User();
         user.setUser_id(2);
         user.setUsername("super");
         user.setEmail("567@");
         user.setPassword("2222222");
-        System.out.println(userService.revisePwd(user));
+        System.out.println(userService.userInfo(null,1));
 
 //        ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
 //        UserService userService =(UserService)context.getBean("UserServiceImpl");
@@ -114,5 +117,24 @@ public class MyTest {
 //        }
 //        Arrays.sort(arr);
 //        System.out.println(Arrays.toString(arr));
+    }
+    @Test
+    public void address(){
+//        JSONObject object=SendReq("http://pv.sohu.com/cityjson?ie=utf-8")
+
+        String st=Http.sendGet("https://ip.ws.126.net/ipquery","ip=190.20.0.1");
+        Map<String,Object> address=JSONObject.parseObject(st);
+        System.out.println(address);
+        ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
+        LogService logService =(LogService) context.getBean("LogServiceImpl");
+        UserService userService=(UserService)context.getBean("UserServiceImpl");
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        User user=new User();
+        user.setUsername("Admin");
+        user.setPassword("123456");
+        System.out.println(userService.login(user));
+//        user.setUser_id(1);
+//        logService.addLogLogin(new LogLogin(1,user,System.currentTimeMillis(),new Date(),"190.20.0.1",address.get("province").toString()+address.get("city").toString()));
+//        System.out.println(logService.logLogin(null,1));
     }
 }

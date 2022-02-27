@@ -1,36 +1,42 @@
 package controller;
 
+import entity.LogLogin;
 import entity.Page;
+import entity.ResultMsg;
 import entity.User;
-import org.apache.ibatis.annotations.Param;
+import eu.bitwalker.useragentutils.Browser;
+import eu.bitwalker.useragentutils.OperatingSystem;
+import eu.bitwalker.useragentutils.UserAgent;
+import listener.SessionCounter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import service.LogService;
 import service.UserService;
+import utils.Utils;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.net.HttpCookie;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Timestamp;
+import java.util.*;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
     private static Page page =new Page();
     private static List<User> userList=new ArrayList<>();
-    private String msg;
+    private static Map<String,Object> onlineUser= SessionCounter.onlineUser;
+    private static ResultMsg resultMsg =new ResultMsg();
     @Autowired
     @Qualifier("UserServiceImpl")
     private UserService userService;
+    @Autowired
+    @Qualifier("LogServiceImpl")
+    private LogService logService;
     @RequestMapping("/index")
     public String index() {
             return "backstage";
@@ -40,22 +46,32 @@ public class UserController {
         if ("POST".equalsIgnoreCase(req.getMethod())!=true){
             return "login";
         }
+        UserAgent userAgent = UserAgent.parseUserAgentString(req.getHeader("User-Agent"));
         User userLogin=userService.login(user);
         if (userLogin!=null){//通过验证
             if (userLogin.getStatus().equals("off")){//账号封禁
-                model.addAttribute("error","账号状态异常，请联系管理员");
+                model.addAttribute("error","账号状态异常");
                 return "login";
             }
             req.getSession().setAttribute("user",userLogin);
-            req.getSession().setMaxInactiveInterval(30*60);
+            req.getSession().setMaxInactiveInterval(24*60*60);
+            onlineUser.put(req.getSession().getId(),((User)req.getSession().getAttribute("user")).getUsername());
+            logService.addLogLogin(new LogLogin(0,null,userLogin.getUser_id(),req.getSession().getId(),new Timestamp(new Date().getTime()),
+                    req.getRemoteAddr(),Utils.address(req.getRemoteAddr()),userAgent.getBrowser().toString()));
             return "redirect:/user/index";
         }
         model.addAttribute("error","账号或密码错误！");//未通过验证
         return "login";
     }
     @RequestMapping("/logout")
-    public String logout(HttpServletRequest req){
-        req.getSession().removeAttribute("user");
+    public String logout(HttpSession session){
+        User userLogout=(User)session.getAttribute("user");
+        onlineUser.remove(session.getId());
+        if (!onlineUser.containsValue(userLogout.getUsername())) {
+            userLogout.setOnline_status("离线");
+            userService.onlineStatus(userLogout);
+        }
+        session.removeAttribute("user");
         return "login";
     }
     @RequestMapping("/mainUser")
@@ -68,7 +84,6 @@ public class UserController {
     }
     @RequestMapping("/pageUser")
     public String pageUser(Model model,Integer u_page,String keywords){
-        if ("".equals(keywords))keywords=null;
         userList=userService.userInfo(keywords,u_page);
         page=userService.pageUser(keywords,u_page);
         model.addAttribute("userList",userList);
@@ -80,37 +95,37 @@ public class UserController {
     @ResponseBody
     public String updateUser(int user_id,String status){
         if (userService.updateUser(user_id,status)!=0){
-            msg="操作成功";
+            resultMsg.trueMsg();
         }else {
-            msg="服务器繁忙";
+            resultMsg.falseMsg();
         }
-        return msg;
+        return resultMsg.getMsg();
     }
     @RequestMapping("/updateRole")
     @ResponseBody
     public String updateRole(@RequestBody User user){
         if (userService.updateRole(user)!=0){
-            msg="操作成功";
+            resultMsg.trueMsg();
         }else {
-            msg="服务器繁忙";
+            resultMsg.falseMsg();
         }
-        return msg;
+        return resultMsg.getMsg();
     }
     @RequestMapping("/checkPwd")
     @ResponseBody
     public String checkPwd(@RequestBody User user){
         if (userService.login(user)!=null){
-            msg="true";
+            resultMsg.trueMsg();
         }else {
-            msg="false";
+            resultMsg.falseMsg();
         }
-        return msg;
+        return resultMsg.getMsg();
     }
     @RequestMapping("/revisePwd")
-    public String revisePwd(Model model, User user, HttpServletRequest req){
+    public String revisePwd(Model model, User user, HttpSession session){
         if (userService.revisePwd(user)!=0){
             model.addAttribute("username",user.getUsername());
-            logout(req);
+            logout(session);
         }
         return "revisePassword";
     }
@@ -118,11 +133,11 @@ public class UserController {
     @ResponseBody
     public String checkUsername(String username){
         if (userService.checkUsername(username)==null){
-            msg="true";
+            resultMsg.trueMsg();
         }else {
-            msg="false";
+            resultMsg.falseMsg();
         }
-        return msg;
+        return resultMsg.getMsg();
     }
     @RequestMapping("/register")
     public String register(){
@@ -144,10 +159,10 @@ public class UserController {
     @ResponseBody
     public String retrievePwd(User user){
         if (userService.retrievePwd(user)!=null){
-            msg="密码重置成功！";
+            resultMsg.trueMsg();
         }else {
-            msg="服务器繁忙";
+            resultMsg.falseMsg();
         }
-        return msg;
+        return resultMsg.getMsg();
     }
 }

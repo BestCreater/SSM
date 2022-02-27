@@ -60,6 +60,10 @@
     <update id="updateRole" parameterType="User">
         update user set role_id=#{role_id} where user_id=#{user_id}
     </update>
+    <!--用户在线状态-->
+    <update id="onlineStatus" parameterType="User">
+        update user set online_status=#{online_status} where user_id=#{user_id}
+    </update>
 
 <!--    <select id="findUserById" resultType="entity.User">-->
 <!--        select * from users where id= #{id}-->

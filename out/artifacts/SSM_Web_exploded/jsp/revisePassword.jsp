@@ -137,7 +137,7 @@
             dataType: "text",
             data:JSON.stringify(user),
             success: function (data) {
-                if (data == "true") {
+                if (data == "操作成功") {
                     checkPassword.style.color = "green";
                     $('#checkPwd').html("正确");
                     checkPassword.value = 'true';
