@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.LogMapper">
+    <!--    分页查询-->
+    <select id="logInfo" resultType="entity.LogLogin" parameterType="map">
+        select * from `log_login`,`user` where log_login.user_id=user.user_id
+        <if test="map.keywords!=null">
+            <bind name="keywords" value="'%'+map.keywords+'%'"/>
+            --         防止sql注入
+            AND (user.username LIKE #{keywords} or log_login.login_address LIKE #{keywords})
+            AND log_login.user_id=user.user_id
+        </if>
+        <if test="map.showRow!=null">
+            limit #{map.showRow},10
+        </if>
+    </select>
+
+    <!--    统计记录数-->
+    <select id="sumRow" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(*) from `log_login`,`user` where log_login.user_id=user.user_id
+        <if test="keywords!=null">
+            <bind name="keyword" value="'%'+keywords+'%'"/>
+            --         防止sql注入
+            AND (user.username LIKE #{keywords} or log_login.login_address LIKE #{keywords})
+            AND log_login.user_id=user.user_id
+        </if>
+    </select>
+
+    <insert id="addLogLogin" parameterType="LogLogin">
+        insert into log_login(user_id,session_id,login_time,ip_address,login_address,browser_type)
+        values (#{user_id},#{session_id},#{login_time},#{ip_address},#{login_address},#{browser_type})
+    </insert>
+</mapper>
