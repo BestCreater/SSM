@@ -14,7 +14,7 @@ public class User {
     private String username;
     private String password;
     private String email;
-    private Timestamp register_time;
+    private String register_time;
     private int role_id;
     private String role_name;
     private String status;

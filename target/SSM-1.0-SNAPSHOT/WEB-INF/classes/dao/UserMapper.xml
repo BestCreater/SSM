@@ -64,13 +64,10 @@
     <update id="onlineStatus" parameterType="User">
         update user set online_status=#{online_status} where user_id=#{user_id}
     </update>
+<!--    注销-->
+    <update id="deleteUser">
+        delete from `user` where user_id=#{user_id}
+    </update>
 
-<!--    <select id="findUserById" resultType="entity.User">-->
-<!--        select * from users where id= #{id}-->
-<!--    </select>-->
-<!--    <insert id="addUser" parameterType="entity.User">-->
-<!--        insert into users (name,creatCode,sex,telNum,time,email,address) values-->
-<!--        (#{name},#{createCode},#{sex},#{telNum},#{time},#{email},#{address})-->
-<!--    </insert>-->
 
 </mapper>

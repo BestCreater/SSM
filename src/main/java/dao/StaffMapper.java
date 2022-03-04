@@ -13,7 +13,8 @@ import java.util.Map;
 public interface StaffMapper {
     List<Staff> staffInfo(@Param("map") Map<String,Object> map);
     Integer sumRow(@Param("keywords")String keywords);
+    Staff checkId(int staff_id);
     int addStaff(Staff staff);
-    int deleteStaff(@Param("staffId")int staffId);
+    int deleteStaff(@Param("staffId")int staff_id);
     int updateStaff(Staff staff);
 }

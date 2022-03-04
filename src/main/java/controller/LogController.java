@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("log")
+@RequestMapping("/log")
 public class LogController {
     private static Page page =new Page();
     private static List<LogLogin> logList=new ArrayList<>();
@@ -23,7 +23,7 @@ public class LogController {
     private LogService logService;
 
     @RequestMapping("/mainLog")
-    public String mainUser(Model model){
+    public String mainLog(Model model){
         logList=logService.logInfo(null,1);
         page=logService.pageLog(null,1);
         model.addAttribute("logList",logList);
@@ -31,7 +31,7 @@ public class LogController {
         return "logLogin";
     }
     @RequestMapping("/pageLog")
-    public String pageUser(Model model,Integer u_page,String keywords){
+    public String pageLog(Model model,Integer u_page,String keywords){
         logList=logService.logInfo(keywords,u_page);
         page=logService.pageLog(keywords,u_page);
         model.addAttribute("logList",logList);

@@ -1,24 +1,21 @@
-//
-//import com.alibaba.fastjson.JSONObject;
-//import entity.LogLogin;
-//import entity.Staff;
-//import entity.User;
-//import org.junit.Test;
-//import org.springframework.context.ApplicationContext;
-//import org.springframework.context.support.ClassPathXmlApplicationContext;
-//import redis.clients.jedis.Jedis;
-//import redis.clients.jedis.Transaction;
-//import service.*;
-//import utils.Http;
-//
-//import java.text.SimpleDateFormat;
-//import java.util.Arrays;
-//import java.util.Date;
-//import java.util.Map;
-//import java.util.Set;
-//import java.util.concurrent.ConcurrentHashMap;
-//
-//public class MyTest {
+
+import com.alibaba.fastjson.JSONObject;
+import entity.*;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Transaction;
+import service.*;
+import utils.Http;
+import utils.RandomDataImpl;
+import utils.Utils;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class MyTest {
 ////    @Test
 ////    public int[] twoSum(int[] nums, int target) {
 ////        int [] twoSum=new int[2];
@@ -77,19 +74,130 @@
 //        }
 //
 //    }
-//    @Test
-//    public void asd(){
-//         Map<String, String> channels=new ConcurrentHashMap<>();
-//         if (channels.isEmpty()){
-//             System.out.println(123);
-//         }if (channels.keySet().isEmpty()){
-//            System.out.println(4564);
+    @Test
+    public void test(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        StaffService  staffService= (StaffService) context.getBean("StaffServiceImpl");
+        SalaryService  salaryService= (SalaryService) context.getBean("SalaryServiceImpl");
+        RandomDataImpl randomData=new RandomDataImpl();
+        Random r=new Random();
+        String [] arr={"管理部","研发部","实习部"};
+        System.out.println(salaryService.pageSalary("管理",1));
+    }
+    @Test
+    public void asd(){
+        System.out.println("abc".substring(2,3));
+        System.out.println(Utils.address("223.144.242.129"));
+    }
+    @Test
+    public void longs() {
+        String s = "aaaa";
+        String x=String.valueOf(s.charAt(0));
+        List<String> arr = new ArrayList<>();
+        if (s.length() == 1) {
+            System.out.println(s);
+            return;
+        }
+        for (int i = 1; i <s.length() ; i++) {
+            x=x+"#"+s.charAt(i);
+        }
+        for (int k = 1; k <= x.length() - 2; k++) {
+            if (x.charAt(k-1)==x.charAt(k+1)) {
+                arr.add(x.substring(k - 1, k + 2));
+                for (int j = 1; k+j+1<x.length()&&k>j; j++) {
+                    if (x.charAt(k-j-1)==x.charAt(k+j+1)) {
+                        arr.add(x.substring(k - j-1, k+j+2));
+                    }else {
+                        break;
+                    }
+                }
+            }
+        }
+        if (arr.size()>0){
+            for (int i = 0; i <arr.size() ; i++) {
+                arr.set(i,arr.get(i).replace("#", ""));
+            }
+            for (int j=0;j<arr.size()-1;j++){
+                if (arr.get(j).length()<arr.get(j+1).length()&&arr.get(j+1).length()>arr.get(0).length()){
+                    arr.set(0,arr.get(j+1));
+                }
+            }
+            System.out.println(arr.get(0));
+        }else {
+            System.out.println(s.charAt(0));
+        }
+//        List <String> arr=new ArrayList<>();
+//        String left;
+//        String right;
+//        String mid;
+//        if (s.length()==1){
+//            return s;
+//        }else if (s.length()==2){
+//            if (s.charAt(0)==s.charAt(1)){
+//                return s;
+//            }else{
+//                return s.substring(0,1);
+//            }
+//        }else{
+//            for (int i = 0; i <=s.length()-2 ; i++) {
+//                left="";
+//                right="";
+//                if (s.charAt(i)==s.charAt(i+1)){
+//                    left=String.valueOf(s.charAt(i));
+//                    right=String.valueOf(s.charAt(i+1));
+//                    arr.add(left+right);
+//                    for (int j = 1; j <s.length()-i-1&&j<=i; j++) {
+//                        if (s.charAt(i-j)==s.charAt(i+j+1)){
+//                            left=s.charAt(i-j)+left;
+//                            right=right+s.charAt(i+j+1);
+//                            arr.add(left+right);
+//                        }else {
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//            for (int i = 1; i <=s.length()-2 ; i++) {
+//                left="";
+//                right="";
+//                mid="";
+//                if (s.charAt(i-1)==s.charAt(i+1)){
+//                    left=String.valueOf(s.charAt(i-1));
+//                    mid=String.valueOf(s.charAt(i));
+//                    right=String.valueOf(s.charAt(i+1));
+//                    arr.add(left+mid+right);
+//                    for (int j = 2; j <s.length()-i&&j<=i; j++) {
+//                        if (s.charAt(i-j)==s.charAt(i+j)){
+//                            left=s.charAt(i-j)+left;
+//                            right=right+s.charAt(i+j);
+//                            arr.add(left+mid+right);
+//                        }else {
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//            for (String s1:arr) {
+//                if (s1.length()>arr.get(0).length()){
+//                    arr.set(0,s1);
+//                }
+//            }
+//            if(arr.size()>0){
+//                return arr.get(0);
+//            }else{
+//                return s.substring(0,1);
+//            }
 //        }
-//    }
-//    @Test
-//    public void testsd(){
-//        ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
-//        UserService userService =(UserService)context.getBean("UserServiceImpl");
+    }
+    @Test
+    public void testsd() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserService userService = (UserService) context.getBean("UserServiceImpl");
+        FileService fileService=(FileService) context.getBean("FileServiceImpl");
+        for (FileOperation fileOperation:fileService.fileInfo("super",1)) {
+            System.out.println(fileOperation);
+        }
+    }
 //        StaffService staffService=(StaffService)context.getBean("StaffServiceImpl");
 //        LogService logService=(LogService)context.getBean("LogServiceImpl");
 //        System.out.println(logService.pageLog(null,1));
@@ -137,4 +245,4 @@
 ////        logService.addLogLogin(new LogLogin(1,user,System.currentTimeMillis(),new Date(),"190.20.0.1",address.get("province").toString()+address.get("city").toString()));
 ////        System.out.println(logService.logLogin(null,1));
 //    }
-//}
+}

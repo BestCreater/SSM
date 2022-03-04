@@ -75,10 +75,71 @@ public class LeetCode {
         for (int i=0;i<s.length();i++){
             for (int j = 0; j <=i ; j++) {
                 if (s.charAt(i-j)==s.charAt(i+j)){
-                    
+
                 }
             }
         }
         return a;
+    }
+    @Test
+    public String longestPalindrome() {
+        String s="";
+        List <String> arr=new ArrayList<>();
+        String left;
+        String right;
+        String mid;
+        if (s.length()==1){
+            return s;
+        }else if (s.length()==2){
+            if (s.charAt(0)==s.charAt(1)){
+                return s;
+            }else{
+                return s.substring(0,1);
+            }
+        }else{
+            for (int i = 0; i <=s.length()-2 ; i++) {
+                if (s.charAt(i)==s.charAt(i+1)){
+                    left=String.valueOf(s.charAt(i));
+                    right=String.valueOf(s.charAt(i+1));
+                    arr.add(left+right);
+                    for (int j = 1; j <s.length()-i-1&&j<=i; j++) {
+                        if (s.charAt(i-j)==s.charAt(i+j+1)){
+                            left=s.charAt(i-j)+left;
+                            right=right+s.charAt(i+j+1);
+                            arr.add(left+right);
+                        }else {
+                            break;
+                        }
+                    }
+                }
+            }
+            for (int i = 1; i <=s.length()-2 ; i++) {
+                if (s.charAt(i-1)==s.charAt(i+1)){
+                    left=String.valueOf(s.charAt(i-1));
+                    mid=String.valueOf(s.charAt(i));
+                    right=String.valueOf(s.charAt(i+1));
+                    arr.add(left+mid+right);
+                    for (int j = 2; j <s.length()-i&&j<=i; j++) {
+                        if (s.charAt(i-j)==s.charAt(i+j)){
+                            left=s.charAt(i-j)+left;
+                            right=right+s.charAt(i+j);
+                            arr.add(left+mid+right);
+                        }else {
+                            break;
+                        }
+                    }
+                }
+            }
+            for (String s1:arr) {
+                if (s1.length()>arr.get(0).length()){
+                    arr.set(0,s1);
+                }
+            }
+            if(arr.size()>0){
+                return arr.get(0);
+            }else{
+                return s.substring(0,1);
+            }
+        }
     }
 }

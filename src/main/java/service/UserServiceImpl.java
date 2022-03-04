@@ -5,6 +5,7 @@ import dao.UserMapper;
 import entity.Page;
 import entity.User;
 import org.springframework.stereotype.Service;
+import utils.Utils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -94,7 +95,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public int register(User user) {
         user.setRole_id(2);
-        user.setRegister_time(new Timestamp(new Date().getTime()));
+        user.setRegister_time(Utils.getStringTime());
         return this.userMapper.register(user);
+    }
+
+    @Override
+    public int deleteUser(int user_id) {
+        return this.userMapper.deleteUser(user_id);
     }
 }

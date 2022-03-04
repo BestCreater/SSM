@@ -1,6 +1,7 @@
 package controller;
 
 import entity.Page;
+import entity.ResultMsg;
 import entity.Staff;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import java.util.List;
 public class StaffController {
     private static Page page =new Page();
     private static List<Staff> staffList=new ArrayList<>();
-    private String msg;
+    private ResultMsg resultMsg=new ResultMsg();
     @Autowired
     @Qualifier("StaffServiceImpl")
     private StaffService staffService;
@@ -35,7 +36,6 @@ public class StaffController {
     }
     @RequestMapping("/pageStaff")
     public String pageStaff(Model model,Integer u_page,String keywords){
-        if ("".equals(keywords))keywords=null;
         staffList=staffService.staffInfo(keywords,u_page);
         page=staffService.pageStaff(keywords,u_page);
         model.addAttribute("staffList",staffList);
@@ -43,37 +43,42 @@ public class StaffController {
         model.addAttribute("page",page);
         return "staff";
     }
+    @RequestMapping("/checkId")
+    @ResponseBody
+    public String checkId(int staff_id){
+        resultMsg.rsFalseMsg();
+        if (staffService.checkId(staff_id)==null){
+            resultMsg.rsTrueMsg();
+        }
+        return resultMsg.getCheckMsg();
+    }
     @RequestMapping("/addStaff")
     @ResponseBody
     public String addStaff(Staff staff){
+        resultMsg.falseMsg();
         if (staffService.addStaff(staff)!=0){
-            msg="添加成功";
-        }else {
-            msg="服务器繁忙，请稍后再试";
+            resultMsg.trueMsg();
         }
-        return msg;
+        return resultMsg.getMsg();
 
     }
     @RequestMapping("/deleteStaff")
     @ResponseBody
-    public String deleteStaff(int staffId){
-        if (staffService.deleteStaff(staffId)!=0){
-            msg="删除成功";
-        }else {
-            msg="服务器繁忙，请稍后再试";
+    public String deleteStaff(int staff_id){
+        resultMsg.falseMsg();
+        if (staffService.deleteStaff(staff_id)!=0){
+            resultMsg.trueMsg();
         }
-        return msg;
+        return resultMsg.getMsg();
 
     }
     @RequestMapping("/updateStaff")
     @ResponseBody
     public String updateStaff(@RequestBody Staff staff){
+        resultMsg.falseMsg();
         if (staffService.updateStaff(staff)!=0){
-            msg="修改成功";
-        }else {
-            msg="服务器繁忙，请稍后再试";
+            resultMsg.trueMsg();
         }
-        return msg;
-
+        return resultMsg.getMsg();
     }
 }

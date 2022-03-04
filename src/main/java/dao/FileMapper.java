@@ -1,23 +1,17 @@
 package dao;
 
 import entity.FileOperation;
-import entity.Page;
+import org.apache.ibatis.annotations.Param;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.text.ParseException;
+
 import java.util.List;
+import java.util.Map;
 
 public interface FileMapper {
-    int fileUpload(Connection connection, FileOperation fileOperation) throws SQLException, ParseException;
-
-    FileOperation fileDownload(Connection connection, int fileId) throws SQLException;
-
-    int removeFile(Connection connection, int fileId) throws SQLException;
-
-    int downloadAmount(Connection connection, int fileId) throws SQLException;
-
-    List<FileOperation> allFile(Connection connection, String userIn, Page page) throws SQLException;
-
-    Page sumRow(Connection connection, String userIn, Page page) throws SQLException;
+    int fileUpload(FileOperation fileOperation);
+    int removeFile(@Param("file_id")int file_id);
+    int downloadAmount(@Param("file_id")int file_id);
+    FileOperation fileDownload(@Param("file_id")int file_id);
+    List<FileOperation> fileInfo(@Param("map") Map<String,Object> map);
+    Integer sumRow(@Param("keywords") String keywords);
 }

@@ -13,7 +13,7 @@
             AND log_login.user_id=user.user_id
         </if>
         <if test="map.showRow!=null">
-            limit #{map.showRow},10
+            order by login_time desc limit #{map.showRow},10
         </if>
     </select>
 
@@ -23,7 +23,7 @@
         <if test="keywords!=null">
             <bind name="keyword" value="'%'+keywords+'%'"/>
             --         防止sql注入
-            AND (user.username LIKE #{keywords} or log_login.login_address LIKE #{keywords})
+            AND (user.username LIKE #{keyword} or log_login.login_address LIKE #{keyword})
             AND log_login.user_id=user.user_id
         </if>
     </select>

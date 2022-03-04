@@ -2,19 +2,15 @@ package dao;
 
 import entity.Notice;
 import entity.Page;
+import org.apache.ibatis.annotations.Param;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 public interface NoticeMapper {
-    public List<Notice> allNotice(Connection connection, String userIn, Page page) throws SQLException;
-
-    public Page sumRow(Connection connection, String userIn, Page page) throws SQLException;
-
-    public int addNotice(Connection connection, Notice notice) throws SQLException, ParseException;
-
-    int removeNotice(Connection connection, int id) throws SQLException;
+    List<Notice> noticeInfo(@Param("map") Map<String,Object> map);
+    Integer sumRow(@Param("keywords") String keywords);
+    int addNotice(Notice notice);
+    int deleteNotice(@Param("id") int id);
 
 }

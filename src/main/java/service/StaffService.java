@@ -11,9 +11,10 @@ public interface StaffService {
 
     Page pageStaff(String keywords, Integer nowPage);
 
+    Staff checkId(int staff_id);
     int addStaff(Staff staff);
 
-    int deleteStaff(int staffId);
+    int deleteStaff(int staff_id);
 
     int updateStaff(Staff staff);
 }

@@ -22,7 +22,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         urlList.add("/user/retrievePwd");
         urlList.add("/user/retrieve");
         String URL = request.getServletPath();
-        System.out.println(URL);
         if (user==null && !urlList.contains(URL)) {
             if (URL.equals("/user/registerSuccess")) {
                 request.setAttribute("error", "请填写注册信息！");

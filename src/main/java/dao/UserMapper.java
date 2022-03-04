@@ -17,6 +17,7 @@ public interface UserMapper {
     Integer sumRow(@Param("keywords")String keywords);
     int updateUser(@Param("user_id")int user_id,@Param("status")String status);
     int updateRole(User user);
+    int deleteUser(@Param("user_id")int user_id);
 
 
 }

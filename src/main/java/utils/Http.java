@@ -42,7 +42,7 @@ public class Http {
 //            }
             // 定义 BufferedReader输入流来读取URL的响应
             in = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream(),"GBK"));
+                    connection.getInputStream(),"utf-8"));
             String line;
             while ((line = in.readLine()) != null) {
                 result += line;
@@ -61,7 +61,7 @@ public class Http {
                 e2.printStackTrace();
             }
         }
-        return result.substring(result.indexOf("{"));
+        return result;
     }
 
     /**

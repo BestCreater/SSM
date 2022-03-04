@@ -1,27 +1,19 @@
 package dao;
 
-import entity.Dept;
-import entity.Page;
+import entity.Department;
 import entity.Salary;
+import org.apache.ibatis.annotations.Param;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public interface SalaryMapper {
-    public List<Dept> allDeptSalary(Connection connection) throws SQLException;//部门定薪表查询(部门定薪)
-
-    public List<Salary> allSalary(Connection connection, String department) throws SQLException;//工资表全表扫描（仅修改部门定薪表时调用）
-
-    public List<Salary> pageSalary(Connection connection, String userIn, Page page) throws SQLException;//分页展示
-
-    public Page sumRow(Connection connection, String userIn, Page page) throws SQLException;//统计记录
-
-    public int addSalary(Connection connection, Salary salary) throws SQLException;//添加工资表记录（单条）
-
-    public int updateSalary(Connection connection, Salary salary) throws SQLException;//修改工资表记录（单条）
-
-    public void updateAllSalary(Connection connection, List<Salary> salaryList) throws SQLException;//工资表全表更新（仅修改部门定薪表时调用）
-
-    public int updateDeptSalary(Connection connection, Dept dept) throws SQLException;//部门定薪表修改
+    Department deptInfo(String department);//部门定薪表查询(部门定薪)
+    List<Salary> deptSalary(@Param("department")String department);//工资表全表扫描（仅修改部门定薪表时调用）
+    List<Salary> salaryInfo(@Param("map")Map<String,Object>map);//分页展示
+    Integer sumRow(@Param("keywords") String keywords);//统计记录
+    int addSalary(Salary salary);//添加工资表记录（单条）
+    int updateSalary(Salary salary);//修改工资表记录（单条）
+    void updateAllSalary(@Param("list") List<Salary> list);//工资表全表更新（仅修改部门定薪表时调用）
+    int updateDeptSalary(Department dept);//部门定薪表修改
 }

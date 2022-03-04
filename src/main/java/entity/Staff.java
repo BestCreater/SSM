@@ -8,12 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Staff {
-    private int staffId;
+    private int staff_id;
     private String name;
     private String sex;
     private String department;
     private int rank;//职级
-    private Salary salary;
-
 }
 

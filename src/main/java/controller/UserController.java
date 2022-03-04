@@ -22,6 +22,7 @@ import utils.Utils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.*;
 
 @Controller
@@ -46,7 +47,6 @@ public class UserController {
         if ("POST".equalsIgnoreCase(req.getMethod())!=true){
             return "login";
         }
-        UserAgent userAgent = UserAgent.parseUserAgentString(req.getHeader("User-Agent"));
         User userLogin=userService.login(user);
         if (userLogin!=null){//通过验证
             if (userLogin.getStatus().equals("off")){//账号封禁
@@ -55,9 +55,11 @@ public class UserController {
             }
             req.getSession().setAttribute("user",userLogin);
             req.getSession().setMaxInactiveInterval(24*60*60);
-            onlineUser.put(req.getSession().getId(),((User)req.getSession().getAttribute("user")).getUsername());
-            logService.addLogLogin(new LogLogin(0,null,userLogin.getUser_id(),req.getSession().getId(),new Timestamp(new Date().getTime()),
-                    req.getRemoteAddr(),Utils.address(req.getRemoteAddr()),userAgent.getBrowser().toString()));
+            onlineUser.put(req.getSession().getId(),((User)req.getSession().
+                    getAttribute("user")).getUsername());
+            logService.addLogLogin(new LogLogin(0,null,userLogin.getUser_id(),
+                    req.getSession().getId(),new Timestamp(new Date().getTime()), req.getRemoteAddr(),
+                    Utils.address(req.getRemoteAddr()),Utils.getBrowser(req.getHeader("User-Agent"))));
             return "redirect:/user/index";
         }
         model.addAttribute("error","账号或密码错误！");//未通过验证
@@ -133,11 +135,11 @@ public class UserController {
     @ResponseBody
     public String checkUsername(String username){
         if (userService.checkUsername(username)==null){
-            resultMsg.trueMsg();
+            resultMsg.rsTrueMsg();
         }else {
-            resultMsg.falseMsg();
+            resultMsg.rsFalseMsg();
         }
-        return resultMsg.getMsg();
+        return resultMsg.getCheckMsg();
     }
     @RequestMapping("/register")
     public String register(){
@@ -149,7 +151,6 @@ public class UserController {
             return "registerSuccess";
         }
         return "register";
-
     }
     @RequestMapping("/retrieve")
     public String retrieve(){
@@ -160,6 +161,21 @@ public class UserController {
     public String retrievePwd(User user){
         if (userService.retrievePwd(user)!=null){
             resultMsg.trueMsg();
+        }else {
+            resultMsg.falseMsg();
+        }
+        return resultMsg.getMsg();
+    }
+    @RequestMapping("/attention")
+    @ResponseBody
+    public String attention(String register_time) throws ParseException {
+        return Utils.getRegisterDay(register_time);
+    }
+    @RequestMapping("/cancel")
+    @ResponseBody
+    public String cancel(int user_id){
+        if (userService.deleteUser(user_id)!=0){
+            resultMsg.cancelMsg();
         }else {
             resultMsg.falseMsg();
         }
