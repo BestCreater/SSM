@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.NoticeMapper">
+    <!--    分页查询-->
+    <select id="noticeInfo" resultType="entity.Notice" parameterType="map">
+        select * from `notice`,`user` where notice.user_id=user.user_id
+        <if test="map.keywords!=null">
+            <bind name="keywords" value="'%'+map.keywords+'%'"/>
+            --         防止sql注入
+            AND (user.username LIKE #{keywords} or notice.title LIKE #{keywords})
+            AND notice.user_id=user.user_id
+        </if>
+        <if test="map.showRow!=null">
+            order by publish_time desc limit #{map.showRow},10
+        </if>
+    </select>
+
+    <!--    统计记录数-->
+    <select id="sumRow" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(*) from `notice`,`user` where notice.user_id=user.user_id
+        <if test="keywords!=null">
+            <bind name="keyword" value="'%'+keywords+'%'"/>
+            --         防止sql注入
+            AND (user.username LIKE #{keyword} or notice.title LIKE #{keyword})
+            AND notice.user_id=user.user_id
+        </if>
+    </select>
+
+    <insert id="addNotice" parameterType="Notice">
+        insert into notice(title,content,begin_time,end_time,user_id,publish_time)
+        values (#{title},#{content},#{begin_time},#{end_time},#{user_id},#{publish_time})
+    </insert>
+    <update id="deleteNotice" parameterType="Notice">
+        delete from notice where id=#{id}
+    </update>
+</mapper>
