@@ -76,7 +76,7 @@ public class MyTest {
 //    }
     @Test
     public void test(){
-        System.out.println(Utils.address("218.75.178.95"));
+        System.out.println(Utils.address("ip=218.75.178.95"));
 //        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 //        StaffService  staffService= (StaffService) context.getBean("StaffServiceImpl");
 //        SalaryService  salaryService= (SalaryService) context.getBean("SalaryServiceImpl");

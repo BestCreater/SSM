@@ -7,7 +7,6 @@ entity\ResultMsg.class
 entity\Staff.class
 entity\LogLogin.class
 controller\FileController.class
-entity\ImageVerificationCode.class
 dao\LogMapper.class
 utils\RandomData.class
 service\StaffService.class

@@ -72,24 +72,25 @@ public class FileController {
     }
 
     @RequestMapping("/download")
-    public void download(HttpServletResponse resp,int file_id) throws Exception{
+    public void download(HttpServletResponse resp,HttpServletRequest req,int file_id) throws Exception{
         FileOperation fileOperation=fileService.fileDownload(file_id);
         resp.setHeader("Content-disposition", "attachment;filename=" + new String(fileOperation.getFile_name().getBytes("UTF-8"), "ISO8859-1"));
-        String filePath = fileOperation.getPath() + "\\" + fileOperation.getFile_name();
-        FileInputStream file1 = new FileInputStream(filePath);
+        resp.setContentType(req.getSession().getServletContext().getMimeType(fileOperation.getFile_name()));
+        String filePath = req.getSession().getServletContext().getRealPath("upload/"+fileOperation.getFile_name());
+        System.out.println(filePath);
         int len;
-        byte[] buffer = new byte[2048];
-        ServletOutputStream out = resp.getOutputStream();
-        while ((len = file1.read(buffer)) > 0) {
-            out.write(buffer, 0, len);
+        InputStream in = new FileInputStream(filePath);
+        OutputStream out = resp.getOutputStream();
+        while ((len = in.read()) != -1) {
+            out.write(len);
         }
-        file1.close();
+        in.close();
         out.close();
     }
     @RequestMapping("/removeFile")
     @ResponseBody
     public String removeFile(@RequestBody FileOperation fileOperation,HttpServletRequest req){
-        String filePath=req.getSession().getServletContext().getRealPath("upload")+"\\"+fileOperation.getFile_name();
+        String filePath=req.getSession().getServletContext().getRealPath("upload/")+fileOperation.getFile_name();
         File file=new File(filePath);
         resultMsg.falseMsg();
         if (file.exists()&&file.delete()&&fileService.removeFile(fileOperation.getFile_id())!=0){

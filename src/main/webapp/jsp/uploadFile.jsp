@@ -26,7 +26,7 @@
 <form method="post" class="myForm" action="${pageContext.request.contextPath}/file/upload"
       onsubmit="return fileCheck()" name="fileupload" enctype="multipart/form-data">
     <label for="description">描述：</label>
-    <input type="text" id="description" class="form-control" name="fileDescription" placeholder="请为上传文件添加描述"
+    <input type="text" id="description" class="form-control" name="file_description" placeholder="请为上传文件添加描述"
            style="width: 50%;"></br>
     <label for="file">文件： </label>
     <input type="file" id="file" name="file"></br><br>

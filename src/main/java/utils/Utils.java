@@ -96,7 +96,7 @@ public class Utils {
     public static String address(String ip){
         String address="";
         try {
-            String st=Http.sendGet("https://ip.help.bj.cn/?ip=",ip);
+            String st=Http.sendGet("https://ip.help.bj.cn/","ip="+ip);
             Map<String,Object> ads= JSONObject.parseObject(st);
             JSONArray jsonArray=(JSONArray) ads.get("data");
             JSONObject data=jsonArray.getJSONObject(0);
