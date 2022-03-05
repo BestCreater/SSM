@@ -14,13 +14,12 @@ body{
 
 .login-wrap {
     position: absolute;
-    width: 320px;
-    height: 310px;
+    width: 310px;
+    height: 320px;
     border-radius: 10px;
     -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    right: 37%;
-    margin-top: 120px;
+    right: 40%;
+    margin-top: 13%;
     background: gold;
     background-size: 100%;
 }

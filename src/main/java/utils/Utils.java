@@ -94,11 +94,17 @@ public class Utils {
         return null;
     }
     public static String address(String ip){
-        String st=Http.sendGet("https://ip.help.bj.cn/",ip);
-        Map<String,Object> ads= JSONObject.parseObject(st);
-        JSONArray jsonArray=(JSONArray) ads.get("data");
-        JSONObject data=jsonArray.getJSONObject(0);
-        return data.get("province").toString()+data.get("city").toString();
+        String address="";
+        try {
+            String st=Http.sendGet("https://ip.help.bj.cn/?ip=",ip);
+            Map<String,Object> ads= JSONObject.parseObject(st);
+            JSONArray jsonArray=(JSONArray) ads.get("data");
+            JSONObject data=jsonArray.getJSONObject(0);
+            address=data.get("province").toString()+data.get("city").toString();
+        }catch (Exception e){
+            address="未知";
+        }
+        return address;
     }
 
     public static String getBrowser(String header) {

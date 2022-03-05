@@ -76,13 +76,22 @@ public class MyTest {
 //    }
     @Test
     public void test(){
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        StaffService  staffService= (StaffService) context.getBean("StaffServiceImpl");
-        SalaryService  salaryService= (SalaryService) context.getBean("SalaryServiceImpl");
-        RandomDataImpl randomData=new RandomDataImpl();
-        Random r=new Random();
-        String [] arr={"管理部","研发部","实习部"};
-        System.out.println(salaryService.pageSalary("管理",1));
+        System.out.println(Utils.address("218.75.178.95"));
+//        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+//        StaffService  staffService= (StaffService) context.getBean("StaffServiceImpl");
+//        SalaryService  salaryService= (SalaryService) context.getBean("SalaryServiceImpl");
+//        UserService userService= (UserService) context.getBean("UserServiceImpl");
+//        User user=new User();
+//        user.setEmail("123@");
+//        user.setUsername("super");
+//        user.setPassword("123456");
+//        System.out.println(userService.retrievePwd(user));
+//        FileService fileService=(FileService)context.getBean("FileServiceImpl");
+//        System.out.println(fileService.fileInfo("admin",1));
+//        RandomDataImpl randomData=new RandomDataImpl();
+//        Random r=new Random();
+//        String [] arr={"管理部","研发部","实习部"};
+//        System.out.println(salaryService.updateDeptSalary(new Department("管理部",6000,300,1000,16)));
     }
     @Test
     public void asd(){

@@ -11,100 +11,19 @@
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/file.css" type="text/css">
 <script type="text/javascript">
     $(function () {
         if ('${sessionScope.user.role_id}' == 0 || '${sessionScope.user.role_id}' == 1) {
             $('.remove').addClass("show");
-        } else {
+        }else {
             $('.remove').addClass("none");
         }
     });
-    var u_page = parseInt("${page.nowPage}");
-    var sumPage = parseInt("${page.sumPage}");
-    var keywords = "";
-
-    function searchFile() {//显示查询信息
-        u_page = 1;//改变页面时初始默认显示第一页
-        keywords = $('#userSearch').val();
-        if (keywords == "") {
-            $('#check').html("请输入查询条件！");
-        } else {
-            window.location.href = "${pageContext.request.contextPath}/file/pageFile?u_page=" + u_page + "&keywords=" + keywords;
-        }
-    }
-
-    function paging(b_value) {//翻页
-        keywords = $('#userSearch').val();
-        if (b_value == 1) {
-            u_page = 1;
-        }
-        if (b_value == 2 && u_page != 1) {
-            u_page -= 1;
-        }
-        if (b_value == 3 && u_page < sumPage) {
-            u_page += 1;
-        }
-        if (b_value == 4) {
-            u_page = sumPage;
-        }
-        window.location.href = "${pageContext.request.contextPath}/file/pageFile?u_page=" + u_page + "&keywords=" + keywords;
-    }
 </script>
 <head>
     <title>通知管理</title>
 </head>
-<style>
-    .right-down-up {
-        width: 100%;
-        height: 8%;
-        background: #EBEEF5;
-    }
-
-    .right-down-up-left {
-        width: 30%;
-        height: 100%;
-        padding-top: 0.5%;
-        padding-left: 11%;
-        background: #EBEEF5;
-        float: left;
-    }
-
-    .right-down-up-right {
-        width: 70%;
-        height: 100%;
-        padding-top: 0.5%;
-        padding-left: 8%;
-        float: right;
-    }
-
-    .right-down-middle {
-        width: 100%;
-        height: 95%;
-        background: #EBEEF5;
-    }
-
-    .right-down-down {
-        width: 100%;
-        height: 6%;
-        background: #E4E7ED;
-        float: right;
-        position: absolute;
-        bottom: 0%;
-    }
-
-    .right-down-down-middle {
-        padding-left: 40%;
-        padding-top: 0.2%;
-    }
-
-    .none {
-        display: none;
-    }
-
-    .show {
-        display: block
-    }
-</style>
 <body>
 <div class="right-down-middle">
     <div class="right-down-up">
@@ -167,13 +86,41 @@
     </div>
 </div>
 <script type="text/javascript">
+    var u_page = parseInt("${page.nowPage}");
+    var sumPage = parseInt("${page.sumPage}");
+    var keywords = "";
     // 回车查询
     $("body").keydown(function () {
         if (event.keyCode == "13") {//keyCode=13是回车键
             $('#search').click();//换成按钮的id即可
         }
     });
+    function searchFile() {//显示查询信息
+        u_page = 1;//改变页面时初始默认显示第一页
+        keywords = $('#userSearch').val();
+        if (keywords == "") {
+            $('#check').html("请输入查询条件！");
+        } else {
+            window.location.href = "${pageContext.request.contextPath}/file/pageFile?u_page=" + u_page + "&keywords=" + keywords;
+        }
+    }
 
+    function paging(b_value) {//翻页
+        keywords = $('#userSearch').val();
+        if (b_value == 1) {
+            u_page = 1;
+        }
+        if (b_value == 2 && u_page != 1) {
+            u_page -= 1;
+        }
+        if (b_value == 3 && u_page < sumPage) {
+            u_page += 1;
+        }
+        if (b_value == 4) {
+            u_page = sumPage;
+        }
+        window.location.href = "${pageContext.request.contextPath}/file/pageFile?u_page=" + u_page + "&keywords=" + keywords;
+    }
     function removeFile(id,name) {
         var r = confirm("您确定要删除文件“" + name + "”吗？");
         if (r == true) {

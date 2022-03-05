@@ -49,7 +49,8 @@ public class SalaryController {
     }
     @RequestMapping("/updateDept")
     @ResponseBody
-    public String updateStaff(@RequestBody Department department){
+    public String updateDept(@RequestBody Department department){
+        System.out.println(department);
         resultMsg.falseMsg();
         if (salaryService.updateDeptSalary(department)!=0){
             resultMsg.trueMsg();

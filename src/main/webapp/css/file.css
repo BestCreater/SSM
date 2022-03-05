@@ -48,3 +48,6 @@
 .show {
     display: block
 }
+.remove{
+    display: none;
+}

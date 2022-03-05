@@ -50,7 +50,7 @@
     </update>
 <!--    找回密码-->
     <select id="retrievePwd" resultType="entity.User" parameterType="User">
-        select * from user where email=#{email} and user_id=#{user_id}
+        select * from user where email=#{email} and username =#{username}
     </select>
 <!--    禁用/启用用户-->
     <update id="updateUser">

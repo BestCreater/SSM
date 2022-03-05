@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/staff.css" type="text/css">
     <script type="text/javascript">
         var u_page = parseInt("${page.nowPage}");
         var sumPage = parseInt("${page.sumPage}");
@@ -47,252 +48,6 @@
         }
     </script>
 </head>
-<style>
-    .right-down-up {
-        width: 100%;
-        height: 8%;
-        background: #EBEEF5;
-    }
-
-    .right-down-up-left {
-        width: 30%;
-        height: 100%;
-        padding-top: 0.5%;
-        padding-left: 11%;
-        background: #EBEEF5;
-        float: left;
-    }
-
-    .right-down-up-right {
-        width: 70%;
-        height: 100%;
-        padding-top: 0.5%;
-        padding-left: 8%;
-        float: right;
-    }
-
-    .right-down-middle {
-        width: 100%;
-        height: 95%;
-        background: #EBEEF5;
-    }
-
-    .right-down-middle table {
-        float: left;
-        width: 80%;
-        margin-left: 130px;
-        margin-top: 20px;
-        border: 1px solid;
-        text-align: center;
-        font-size: 1.5rem;
-        letter-spacing: 0.5rem;
-        border: 2px solid black;
-    }
-
-    .right-down-middle td, th {
-        border: 1px solid #6e6767;
-        text-align: center;
-    }
-
-    .right-down-down {
-        width: 100%;
-        height: 6%;
-        background: #E4E7ED;
-        float: right;
-        position: absolute;
-        bottom: 0%;
-    }
-
-    .right-down-down-middle {
-        padding-left: 40%;
-        padding-top: 0.2%;
-    }
-
-    /*弹窗-------*/
-    .modal {
-        display: none; /* 默认隐藏 */
-        /*生成绝对定位的元素，相对于浏览器窗口进行定位。*/
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        /*设置弹窗位置*/
-        padding-top: 10%;
-        /*padding-bottom: 300px;*/
-        /*浮在全屏上*/
-        width: 100%;
-        height: 100%;
-        /*overflow：auto；如果内容被修剪，则浏览器会显示滚动条，以便查看其余内容。*/
-        overflow: auto;
-        background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.4);
-        text-align: center;
-    }
-
-    /* 弹窗内容 */
-    .modal-content {
-        /*position: relative;*/
-        /*弹窗背景色设置*/
-        background-color: #fefefe;
-        margin: auto;
-        padding: 200px auto;
-        height: 320px;
-        width: 400px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        -webkit-animation-name: animatetop;
-        -webkit-animation-duration: 0.4s;
-        animation-name: animatetop;
-        animation-duration: 0.4s
-    }
-
-    /* 添加动画 */
-    @-webkit-keyframes animatetop {
-        from {
-            top: -200px;
-            opacity: 0
-        }
-        to {
-            top: 0;
-            opacity: 1
-        }
-    }
-
-    @keyframes animatetop {
-        from {
-            top: -200px;
-            opacity: 0
-        }
-        to {
-            top: 0;
-            opacity: 1
-        }
-    }
-
-    /* 关闭按钮 */
-    .close {
-        color: white;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close:hover, .close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .modal-header {
-        display: block;
-        line-height: 30px;
-        padding: 2px 10px;
-        background: #03264A;
-        color: white;
-        text-align: left;
-    }
-
-    .modal-body {
-        padding: 2px 16px;
-        font-size: 18px;
-        height: 210px;
-        overflow: auto;
-    }
-
-    .modal-body-text {
-        text-align: left;
-        width: 345px;
-        height: 80%;
-    }
-
-    .modal-footer {
-        display: block;
-        line-height: 30px;
-        padding: 2px 10px;
-        background: #03264A;
-        color: black;
-    }
-
-    /*   ******************* 隐藏修改弹窗*/
-    /*弹窗-------*/
-    .modal-revise {
-        display: none; /* 默认隐藏 */
-        /*生成绝对定位的元素，相对于浏览器窗口进行定位。*/
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        /*设置弹窗位置*/
-        padding-top: 10%;
-        /*padding-bottom: 300px;*/
-        /*浮在全屏上*/
-        width: 100%;
-        height: 100%;
-        /*overflow：auto；如果内容被修剪，则浏览器会显示滚动条，以便查看其余内容。*/
-        overflow: auto;
-        background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.4);
-        text-align: center;
-    }
-
-    /* 弹窗内容 */
-    .modal-content-revise {
-        /*position: relative;*/
-        /*弹窗背景色设置*/
-        background-color: #fefefe;
-        margin: auto;
-        padding: 200px auto;
-        height: 310px;
-        width: 400px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        -webkit-animation-name: animatetop;
-        -webkit-animation-duration: 0.4s;
-        animation-name: animatetop;
-        animation-duration: 0.4s
-    }
-
-    /* 关闭按钮 */
-    .close-revise {
-        color: white;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close-revise:hover, .close-revise:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .modal-header-revise {
-        display: block;
-        line-height: 30px;
-        padding: 2px 10px;
-        background: #03264A;
-        color: white;
-        text-align: center;
-    }
-
-    .modal-body-revise {
-        padding: 2px 16px;
-        font-size: 18px;
-        height: 210px;
-    }
-
-    .modal-body-text-revise {
-        text-align: left;
-        width: 345px;
-        height: 80%;
-    }
-
-    .modal-footer-revise {
-        display: block;
-        line-height: 30px;
-        padding: 2px 10px;
-        background: #03264A;
-        color: black;
-    }
-</style>
 <body style="margin: 0px">
 <div class="right-down-middle">
     <div class="right-down-up">
@@ -311,7 +66,7 @@
         </div>
     </div>
     <table class="table table-hover">
-        <caption>员工信息列表</caption>
+        <h3 style="text-align: center">员工信息列表</h3>
         <thead>
         <tr>
             <th>员工编号</th>
@@ -361,7 +116,7 @@
         <div class="modal-body">
             <p>请填写新员工信息</p>
             <div class="modal-body-text">
-                编号： <input type="text" id="id" name="id" placeholder="请输入4位数字编号"><br>
+                编号： <input type="text" id="id" name="id" placeholder="请输入6位数字编号" onfocus="checkId()"><span id="staffId"></span><br>
                 姓名： <input type="text" id="name" name="name" placeholder="请输入姓名"><br>
                 部门： <input type="radio" name="department" value="管理部"/>管理部
                 <input type="radio" name="department" value="研发部"/>研发部
@@ -414,6 +169,7 @@
     </div>
 </div>
 <script type="text/javascript">
+    var staffId=document.getElementById("staffId")
     // 回车查询
     $("body").keydown(function () {
         if (event.keyCode == "13") {//keyCode=13是回车键
@@ -533,6 +289,32 @@
         }
     }
 
+    function checkId(){
+        var id=$('#id').val();
+        if (id.length != 6 || !isNumber(id)) {
+            $('#error').html("请输入6位整数编号！");
+            $('#staffId').html();
+            return;
+        }else {
+            $.ajax({
+                type:"POST",
+                url:'${pageContext.request.contextPath}/staff/checkId',
+                data:{"staff_id":id},
+                dataType: "text",
+                success:function (data){
+                    if (data == "已存在") {
+                        staffId.style.color = "crimson";
+                        staffId.value = null;
+                        $('#staffId').html('已存在!');
+                    } else {
+                        staffId.style.color = "green";
+                        staffId.value = 'true';
+                        $('#staffId').html('可用');
+                    }
+                }
+            });
+        }
+    }
     //*************************添加员工*****************************
     function addCheck() {
         //执行弹出窗体得确定后得操作
@@ -547,8 +329,12 @@
                 u_dept = de[i].value;
             }
         }
-        if (u_id.length != 4 || !isNumber(u_id)) {
-            $('#error').html("编号必须为4位整数！");
+        if (staffId.value==null){
+            $('#error').html("请输入有效编号！");
+            return;
+        }
+        if (u_id.length != 6 || !isNumber(u_id)) {
+            $('#error').html("编号必须为6位整数！");
             return;
         }
         if (u_name == "") {

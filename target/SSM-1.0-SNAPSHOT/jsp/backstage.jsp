@@ -15,6 +15,15 @@
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/backstage.css" type="text/css">
+    <script type="text/javascript">
+        $(function () {
+            if ('${sessionScope.user.role_id}' == 0 || '${sessionScope.user.role_id}' == 1) {
+                $('.user').addClass("show");
+            } else {
+                $('.user').addClass("none");
+            }
+        })
+    </script>
 </head>
 <body style="margin: 0px">
 <div class="container">
@@ -93,13 +102,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(function () {
-        if ('${sessionScope.user.role_id}' == 0 || '${sessionScope.user.role_id}' == 1) {
-            $('.user').addClass("show");
-        } else {
-            $('.user').addClass("none");
-        }
-    })
+
     function pageChange(value, href) {
         $("#kiu").find("li:eq(1)").remove();
         $("#kiu").append("<li><a href='" + href + "' target='content' style='color: #0F0F10'>" + value + "</a></li>");

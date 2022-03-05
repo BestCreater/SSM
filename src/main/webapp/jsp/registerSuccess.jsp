@@ -12,33 +12,9 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/registerSuccess.css" type="text/css">
+
 </head>
-<style>
-    .container {
-        width: 100%;
-        height: 100%;
-    }
-
-    .middle {
-        width: 60%;
-        height: 45%;
-        padding-left: 40%;
-        padding-top: 13%;
-        float: left;
-        text-align: center;
-        font-size: 3.2rem;
-    }
-
-    .middle img {
-        width: 52%;
-        height: 73%;
-    }
-
-    .accordion span {
-        font-size: 2.4rem;
-        color: #27292C;
-    }
-</style>
 <body>
 <div class="container">
     <div class="middle">

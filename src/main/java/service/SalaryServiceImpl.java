@@ -68,7 +68,6 @@ public class SalaryServiceImpl implements SalaryService {
             for (int i = 0; i <salaryList.size() ; i++) {
                 salaryList.set(i,Utils.getUpdateSalary(salaryList.get(i),dept));
             }
-            System.out.println(salaryList.toString());
             updateAllSalary(salaryList);
         }
         return row;

@@ -43,7 +43,7 @@ public class FileController {
     public String pageFile(String keywords,Integer u_page,Model model){
         fileList=fileService.fileInfo(keywords,u_page);
         page=fileService.pageFile(keywords,u_page);
-        model.addAttribute("staffList",fileList);
+        model.addAttribute("fileList",fileList);
         model.addAttribute("keywords",keywords);
         model.addAttribute("page",page);
         return "file";

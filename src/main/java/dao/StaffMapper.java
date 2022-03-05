@@ -15,6 +15,6 @@ public interface StaffMapper {
     Integer sumRow(@Param("keywords")String keywords);
     Staff checkId(int staff_id);
     int addStaff(Staff staff);
-    int deleteStaff(@Param("staffId")int staff_id);
+    int deleteStaff(@Param("staff_id")int staff_id);
     int updateStaff(Staff staff);
 }

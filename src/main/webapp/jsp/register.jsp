@@ -9,99 +9,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
-<style>
-    .container {
-        margin: 0 auto;
-        width: 500px;
-    }
-
-    form {
-        width: 450px;
-        margin: 0 auto;
-        background: #F2F6FC;
-        border-radius: 15px;
-        position: relative;
-    }
-
-    h1 {
-        font-size: 28px;
-        text-align: center;
-        color: black;
-    }
-
-    .w {
-        color: red;
-        margin-left: 50px;
-        display: inline-block;
-    / / 不占单独一行的块级元素
-    }
-
-    .p {
-        color: red;
-        margin-left: 33px;
-        display: inline-block;
-    / / 不占单独一行的块级元素
-    }
-
-    label {
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .register {
-        height: 35px;
-        width: 300px;
-    }
-
-    .q {
-        color: red;
-        margin-left: 17px;
-        display: inline-block;
-    }
-
-    .submit {
-        border-radius: 7px;
-        margin-left: 150px;
-        height: 35px;
-        width: 120px;
-        background-color: #000;
-        border: none;
-        display: block;
-        padding: 0;
-        color: #FFF;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    a {
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    .left {
-        position: absolute;
-        bottom: 20px;
-    }
-
-    .left {
-        left: 20px;
-        font-size: 2rem;
-    }
-
-    .msg {
-        height: 1%;
-        text-align: center;
-    }
-
-    .checkUser {
-        font-size: 1.6rem;
-        color: green;
-    }
-</style>
 <head>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css" type="text/css">
 </head>
 <body background="${pageContext.request.contextPath}/img/back_01.jpg" style=" background-repeat:no-repeat ;background-size:100% 100%;
 background-attachment: fixed;margin: 0px">

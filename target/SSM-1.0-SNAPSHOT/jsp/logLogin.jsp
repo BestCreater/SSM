@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
-
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/logLogin.css" type="text/css">
   <script type="text/javascript">
     var u_page = parseInt("${page.nowPage}");
     var sumPage = parseInt("${page.sumPage}");
@@ -57,63 +57,6 @@
     }
   </script>
 </head>
-<style>
-  .right-down-up {
-    width: 100%;
-    height: 8%;
-    background: #EBEEF5;
-  }
-
-  .right-down-up-right {
-    width: 70%;
-    height: 100%;
-    padding-top: 0.5%;
-    padding-left: 8%;
-    float: right;
-  }
-
-  .right-down-middle {
-    width: 100%;
-    height: 95%;
-    background: #EBEEF5;
-  }
-
-  .right-down-middle table {
-    float: left;
-    width: 80%;
-    margin-left: 130px;
-    margin-top: 15px;
-    border: 1px solid;
-    text-align: center;
-    font-size: 1.5rem;
-    border: 2px solid black;
-  }
-
-  .right-down-middle td, th {
-    border: 1px solid #6e6767;
-    text-align: center;
-  }
-
-  .right-down-down {
-    width: 100%;
-    height: 6%;
-    background: #E4E7ED;
-    float: right;
-    position: absolute;
-    bottom: 0%;
-  }
-
-  .right-down-down-middle {
-    padding-left: 40%;
-    padding-top: 0.2%;
-  }
-
-  .modal-body-user span {
-    font-size: 1.2rem;
-  }
-
-
-</style>
 <body style="margin: 0px">
 <div class="right-down-middle">
   <div class="right-down-up">

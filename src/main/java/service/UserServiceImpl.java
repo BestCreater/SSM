@@ -86,8 +86,8 @@ public class UserServiceImpl implements UserService {
     public User retrievePwd(User user) {
         User users=this.userMapper.retrievePwd(user);
         if (users!=null){
-            this.userMapper.revisePwd(user);
-            return users;
+            revisePwd(user);
+            return user;
         }
         return null;
     }

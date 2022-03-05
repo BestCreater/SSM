@@ -96,30 +96,27 @@ public class UserController {
     @RequestMapping("/updateUser")
     @ResponseBody
     public String updateUser(int user_id,String status){
+        resultMsg.falseMsg();
         if (userService.updateUser(user_id,status)!=0){
             resultMsg.trueMsg();
-        }else {
-            resultMsg.falseMsg();
         }
         return resultMsg.getMsg();
     }
     @RequestMapping("/updateRole")
     @ResponseBody
     public String updateRole(@RequestBody User user){
+        resultMsg.falseMsg();
         if (userService.updateRole(user)!=0){
             resultMsg.trueMsg();
-        }else {
-            resultMsg.falseMsg();
         }
         return resultMsg.getMsg();
     }
     @RequestMapping("/checkPwd")
     @ResponseBody
     public String checkPwd(@RequestBody User user){
+        resultMsg.falseMsg();
         if (userService.login(user)!=null){
             resultMsg.trueMsg();
-        }else {
-            resultMsg.falseMsg();
         }
         return resultMsg.getMsg();
     }
@@ -134,11 +131,11 @@ public class UserController {
     @RequestMapping("/checkUsername")
     @ResponseBody
     public String checkUsername(String username){
+        resultMsg.rsFalseMsg();
         if (userService.checkUsername(username)==null){
             resultMsg.rsTrueMsg();
-        }else {
-            resultMsg.rsFalseMsg();
         }
+
         return resultMsg.getCheckMsg();
     }
     @RequestMapping("/register")
@@ -158,11 +155,10 @@ public class UserController {
     }
     @RequestMapping("/retrievePwd")
     @ResponseBody
-    public String retrievePwd(User user){
+    public String retrievePwd(@RequestBody User user){
+        resultMsg.falseMsg();
         if (userService.retrievePwd(user)!=null){
             resultMsg.trueMsg();
-        }else {
-            resultMsg.falseMsg();
         }
         return resultMsg.getMsg();
     }
@@ -174,10 +170,9 @@ public class UserController {
     @RequestMapping("/cancel")
     @ResponseBody
     public String cancel(int user_id){
+        resultMsg.falseMsg();
         if (userService.deleteUser(user_id)!=0){
             resultMsg.cancelMsg();
-        }else {
-            resultMsg.falseMsg();
         }
         return resultMsg.getMsg();
     }

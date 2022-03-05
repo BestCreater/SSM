@@ -43,7 +43,7 @@
     </insert>
 
     <update id="updateSalary" parameterType="Salary">
-        update salary set salary=#{staff_id}, subsidy=#{salary},bonus=#{bonus},annual=#{annual}
+        update salary set salary=#{salary}, subsidy=#{subsidy},bonus=#{bonus},annual=#{annual}
         where staff_id=#{staff_id}
     </update>
 

@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/user.css" type="text/css">
+
 
     <script type="text/javascript">
         var u_page = parseInt("${page.nowPage}");
@@ -32,9 +34,6 @@
             if ('${sessionScope.user.role_id}' == 0) {
                 $('.delete').addClass("show");
                 $('.operation').addClass("show");
-            } else {
-                $('.delete').addClass("none");
-                $('.operation').addClass("none");
             }
         });
 
@@ -67,219 +66,6 @@
         }
     </script>
 </head>
-<style>
-    .right-down-up {
-        width: 100%;
-        height: 8%;
-        background: #EBEEF5;
-    }
-
-    .right-down-up-right {
-        width: 70%;
-        height: 100%;
-        padding-top: 0.5%;
-        padding-left: 8%;
-        float: right;
-    }
-
-    .right-down-middle {
-        width: 100%;
-        height: 95%;
-        background: #EBEEF5;
-    }
-
-    .right-down-middle table {
-        float: left;
-        width: 80%;
-        margin-left: 130px;
-        margin-top: 15px;
-        border: 1px solid;
-        text-align: center;
-        font-size: 1.5rem;
-        letter-spacing: 0.5rem;
-        border: 2px solid black;
-    }
-
-    .right-down-middle td, th {
-        border: 1px solid #6e6767;
-        text-align: center;
-    }
-
-    .right-down-down {
-        width: 100%;
-        height: 6%;
-        background: #E4E7ED;
-        float: right;
-        position: absolute;
-        bottom: 0%;
-    }
-
-    .right-down-down-middle {
-        padding-left: 40%;
-        padding-top: 0.2%;
-    }
-
-    /*弹窗-------*/
-    .modal-user {
-        display: none; /* 默认隐藏 */
-        /*生成绝对定位的元素，相对于浏览器窗口进行定位。*/
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        /*设置弹窗位置*/
-        padding-top: 8%;
-        /*padding-bottom: 300px;*/
-        /*浮在全屏上*/
-        width: 100%;
-        height: 100%;
-        /*overflow：auto；如果内容被修剪，则浏览器会显示滚动条，以便查看其余内容。*/
-        overflow: auto;
-        background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.4);
-        text-align: center;
-    }
-
-    /* 弹窗内容 */
-    .modal-content-user {
-        /*position: relative;*/
-        /*弹窗背景色设置*/
-        background-color: #fefefe;
-        margin: auto;
-        padding: 200px auto;
-        height: 320px;
-        width: 420px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        -webkit-animation-name: animatetop;
-        -webkit-animation-duration: 0.4s;
-        animation-name: animatetop;
-        animation-duration: 0.4s;
-        overflow: auto;
-    }
-
-    /* 添加动画 */
-    @-webkit-keyframes animatetop {
-        from {
-            top: -200px;
-            opacity: 0
-        }
-        to {
-            top: 0;
-            opacity: 1
-        }
-    }
-
-    @keyframes animatetop {
-        from {
-            top: -200px;
-            opacity: 0
-        }
-        to {
-            top: 0;
-            opacity: 1
-        }
-    }
-
-    /* 关闭按钮 */
-    .close-user {
-        color: #03264A;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close-user:hover, .close-notice:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .modal-header-user {
-        display: block;
-        line-height: 30px;
-        padding: 2px 10px;
-        background: #fefefe;
-        color: cornflowerblue;
-        text-align: center;
-        border-bottom: 2px solid cornflowerblue;
-    }
-
-    .modal-body-user {
-        padding: 2px 40px;
-        font-size: 18px;
-        height: 210px;
-        text-align: left;
-    }
-
-    .modal-body-user span {
-        font-size: 1.2rem;
-    }
-
-    .modal-footer-user {
-        display: block;
-        line-height: 30px;
-        padding: 2px 10px;
-        background: #DCDFE6;
-        color: black;
-    }
-
-    .none {
-        display: none;
-    }
-
-    .show {
-        display: block
-    }
-    /*switch开关*/
-    .switch {
-        width: 50px;
-        height: 20px;
-        position: relative;
-        border: 1px solid #dfdfdf;
-        background-color: #fdfdfd;
-        box-shadow: #dfdfdf 0 0 0 0 inset;
-        border-radius: 20px;
-        background-clip: content-box;
-        display: inline-block;
-        -webkit-appearance: none;
-        user-select: none;
-        outline: none;
-    }
-    .switch:before {
-        content: '';
-        width: 18px;
-        height: 18px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        border-radius: 20px;
-        background-color: #fff;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-    }
-    .switch:checked {
-        border-color: #64bd63;
-        box-shadow: #64bd63 0 0 0 16px inset;
-        background-color: #64bd63;
-    }
-    .switch:checked:before {
-        left: 30px;
-    }
-    .switch.switch-anim {
-        transition: border cubic-bezier(0, 0, 0, 1) 0.4s, box-shadow cubic-bezier(0, 0, 0, 1) 0.4s;
-    }
-    .switch.switch-anim:before {
-        transition: left 0.3s;
-    }
-    .switch.switch-anim:checked {
-        box-shadow: #64bd63 0 0 0 16px inset;
-        background-color: #64bd63;
-        transition: border ease 0.4s, box-shadow ease 0.4s, background-color ease 1.2s;
-    }
-    .switch.switch-anim:checked:before {
-        transition: left 0.3s;
-    }
-
-</style>
 <body style="margin: 0px">
 <div class="right-down-middle">
     <div class="right-down-up">
@@ -302,7 +88,7 @@
             <th>账号状态</th>
             <th>注册时间</th>
             <th>在线状态</th>
-            <th class="operation">操作</th>
+            <th class="operation" style="display: none;">操作</th>
         </tr>
         </thead>
         <tbody id="content">
@@ -324,7 +110,7 @@
                 <c:if test="${user.online_status=='离线'}">
                     <td>${user.online_status}</td>
                 </c:if>
-                <td class="delete">
+                <td class="delete" style="display: none;">
                     <a href="javascript:openUser('${user.user_id}','${user.username}','${user.role_name}')">权限</a>
                 </td>
             </tr>
@@ -368,9 +154,20 @@
 </div>
 
 <script type="text/javascript">
+    // 回车查询
+    $("body").keydown(function () {
+        if (event.keyCode == "13") {//keyCode=13是回车键
+            $('#search').click();//换成按钮的id即可
+        }
+    });
     function updateUser(id,username,role,status){
-        document.getElementById(status+id);
         var switchAnim = document.querySelector("#"+status+id);
+        if('${sessionScope.user.role_id}'!=0){
+            alert('没有操作权限！');
+            if (switchAnim.checked==true){switchAnim.checked=false;}
+            else {switchAnim.checked=true};            r
+            eturn;
+        }
         if(role=="超级管理员"){
             alert("不能禁用超级管理员！");
             switchAnim.checked=true;
@@ -427,9 +224,14 @@
                 alert("该用户当前已是" + role_name + "!");
                 return;
             } else {
+                var user={
+                    "user_id": id,
+                    "role_id": role_id
+                };
                 $.ajax({
                     type: "POST",
-                    data: {"user_id": id, "role_id": role_id},
+                    data: JSON.stringify(user),
+                    contentType : 'application/json;charset=UTF-8',
                     url: "${pageContext.request.contextPath}/user/updateRole",
                     dataType: "text",
                     success: function (data) {
