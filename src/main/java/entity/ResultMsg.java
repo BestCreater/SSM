@@ -12,6 +12,7 @@ public class ResultMsg {
     private String checkMsg;
     private String loginMsg;
     private String status;
+    private String codeMsg;
     public String trueMsg(){
         this.setMsg("操作成功");
         return this.msg;
@@ -31,5 +32,13 @@ public class ResultMsg {
     public String rsFalseMsg(){
         this.setCheckMsg("已存在");
         return this.checkMsg;
+    }
+    public String epCheckMsg(){
+        this.setCheckMsg("用户名或邮箱有误");
+        return this.checkMsg;
+    }
+    public String falseCode(){
+        this.setCodeMsg("验证码有误");
+        return this.codeMsg;
     }
 }

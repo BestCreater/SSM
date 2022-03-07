@@ -1,0 +1,16 @@
+.main {
+    width: 100%;
+    height: 100%;
+    background: #EBEEF5;
+}
+
+.content {
+    width: 100%;
+    height: 70%;
+    padding-left: 10%;
+    padding-top: 10%;
+}
+.last {
+    height: 15%;
+    padding-left: 10%;
+}

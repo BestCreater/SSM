@@ -19,6 +19,7 @@ import service.LogService;
 import service.UserService;
 import utils.Utils;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
@@ -35,6 +36,8 @@ public class UserController {
     @Autowired
     @Qualifier("UserServiceImpl")
     private UserService userService;
+    @Autowired
+    private Utils utils;
     @Autowired
     @Qualifier("LogServiceImpl")
     private LogService logService;
@@ -59,7 +62,7 @@ public class UserController {
                     getAttribute("user")).getUsername());
             logService.addLogLogin(new LogLogin(0,null,userLogin.getUser_id(),
                     req.getSession().getId(),new Timestamp(new Date().getTime()), req.getRemoteAddr(),
-                    Utils.address(req.getRemoteAddr()),Utils.getBrowser(req.getHeader("User-Agent"))));
+                    utils.address(req.getRemoteAddr()),Utils.getBrowser(req.getHeader("User-Agent"))));
             return "redirect:/user/index";
         }
         model.addAttribute("error","账号或密码错误！");//未通过验证
@@ -69,7 +72,7 @@ public class UserController {
     public String logout(HttpSession session){
         User userLogout=(User)session.getAttribute("user");
         onlineUser.remove(session.getId());
-        if (!onlineUser.containsValue(userLogout.getUsername())) {
+        if (userLogout!=null&&!onlineUser.containsValue(userLogout.getUsername())) {
             userLogout.setOnline_status("离线");
             userService.onlineStatus(userLogout);
         }
@@ -121,13 +124,23 @@ public class UserController {
         return resultMsg.getMsg();
     }
     @RequestMapping("/revisePwd")
-    public String revisePwd(Model model, User user, HttpSession session){
+    public String revisePwd(Model model, User user, HttpServletRequest req){
+        if ("POST".equalsIgnoreCase(req.getMethod())!=true){
+            return "login";
+        }
         if (userService.revisePwd(user)!=0){
             model.addAttribute("username",user.getUsername());
-            logout(session);
+            logout(req.getSession());
+            return "login";
         }
         return "revisePassword";
     }
+
+    @RequestMapping("/register")
+    public String register(){
+        return "register";
+    }
+
     @RequestMapping("/checkUsername")
     @ResponseBody
     public String checkUsername(String username){
@@ -135,12 +148,32 @@ public class UserController {
         if (userService.checkUsername(username)==null){
             resultMsg.rsTrueMsg();
         }
-
         return resultMsg.getCheckMsg();
     }
-    @RequestMapping("/register")
-    public String register(){
-        return "register";
+    @RequestMapping("/checkEmail")
+    @ResponseBody
+    public String checkEmail(String email){
+        resultMsg.rsFalseMsg();
+        if (userService.checkEmail(email)==null){
+            resultMsg.rsTrueMsg();
+        }
+        return resultMsg.getCheckMsg();
+    }
+
+    @RequestMapping("/sendEmail")
+    @ResponseBody
+    public String sendEmail(HttpServletRequest req,HttpSession session,User user) throws MessagingException {
+        if ("POST".equalsIgnoreCase(req.getMethod())!=true){
+            return null;
+        }
+        int code=utils.email_163(user);
+        session.setAttribute("code",code);
+        session.setMaxInactiveInterval(60*5);
+        System.out.println(session.getAttribute("code"));
+        if (code==0){
+            return resultMsg.falseMsg();
+        }
+        return resultMsg.trueMsg();
     }
     @RequestMapping("/registerUser")
     public String registerUser(User user){
@@ -175,5 +208,13 @@ public class UserController {
             resultMsg.cancelMsg();
         }
         return resultMsg.getMsg();
+    }
+    @RequestMapping("/code")
+    @ResponseBody
+    public String code(HttpSession session,String code){
+        if (session.getAttribute("code")!=null&&((session.getAttribute("code"))).equals(Integer.valueOf(code))){
+            return "true";
+        }
+        return "false";
     }
 }

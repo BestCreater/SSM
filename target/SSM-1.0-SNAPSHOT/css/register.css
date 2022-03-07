@@ -1,0 +1,87 @@
+.container {
+    margin: 0 auto;
+    width: 500px;
+}
+
+form {
+    width: 450px;
+    margin: 0 auto;
+    background: #F2F6FC;
+    border-radius: 15px;
+    position: relative;
+}
+
+h1 {
+    font-size: 28px;
+    text-align: center;
+    color: black;
+}
+
+.w {
+    color: red;
+    margin-left: 50px;
+    display: inline-block;
+/ / 不占单独一行的块级元素
+}
+
+.p {
+    color: red;
+    margin-left: 33px;
+    display: inline-block;
+/ / 不占单独一行的块级元素
+}
+
+label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.register {
+    height: 35px;
+    width: 300px;
+}
+
+.q {
+    color: red;
+    margin-left: 17px;
+    display: inline-block;
+}
+
+.submit {
+    border-radius: 7px;
+    margin-left: 150px;
+    height: 35px;
+    width: 120px;
+    background-color: #000;
+    border: none;
+    display: block;
+    padding: 0;
+    color: #FFF;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.left {
+    position: absolute;
+    bottom: 20px;
+}
+
+.left {
+    left: 20px;
+    font-size: 2rem;
+}
+
+.msg {
+    height: 1%;
+    text-align: center;
+}
+
+.checkUser {
+    font-size: 1.6rem;
+    color: green;
+}

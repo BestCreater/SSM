@@ -83,13 +83,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User checkEmail(String email) {
+        return this.userMapper.checkEmail(email);
+    }
+
+    @Override
     public User retrievePwd(User user) {
-        User users=this.userMapper.retrievePwd(user);
-        if (users!=null){
-            revisePwd(user);
-            return user;
-        }
-        return null;
+        return this.userMapper.retrievePwd(user);
     }
 
     @Override

@@ -1,0 +1,129 @@
+.right-down-up {
+    width: 100%;
+    height: 8%;
+    background: #EBEEF5;
+}
+
+.right-down-up-left {
+    width: 30%;
+    height: 100%;
+    padding-top: 0.5%;
+    padding-left: 11%;
+    background: #EBEEF5;
+    float: left;
+}
+
+.right-down-up-right {
+    width: 70%;
+    height: 100%;
+    padding-top: 0.5%;
+    padding-left: 8%;
+    float: right;
+}
+
+.right-down-middle {
+    width: 100%;
+    height: 95%;
+    background: #EBEEF5;
+}
+
+.right-down-down {
+    width: 100%;
+    height: 6%;
+    background: #E4E7ED;
+    float: right;
+    position: absolute;
+    bottom: 0%;
+}
+
+.right-down-down-middle {
+    padding-left: 40%;
+    padding-top: 0.2%;
+}
+
+/*弹窗-------*/
+.modal-notice {
+    display: none; /* 默认隐藏 */
+    /*生成绝对定位的元素，相对于浏览器窗口进行定位。*/
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    /*设置弹窗位置*/
+    padding-top: 4%;
+    /*padding-bottom: 300px;*/
+    /*浮在全屏上*/
+    width: 100%;
+    height: 100%;
+    /*overflow：auto；如果内容被修剪，则浏览器会显示滚动条，以便查看其余内容。*/
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+/* 弹窗内容 */
+.modal-content-notice {
+    /*position: relative;*/
+    /*弹窗背景色设置*/
+    background-color: #fefefe;
+    margin: auto;
+    padding: 200px auto;
+    height: 500px;
+    width: 580px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    overflow: auto;
+}
+
+/* 关闭按钮 */
+.close-notice {
+    color: #03264A;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-notice:hover, .close-notice:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header-notice {
+    display: block;
+    line-height: 30px;
+    padding: 2px 10px;
+    background: #fefefe;
+    color: cornflowerblue;
+    text-align: center;
+    border-bottom: 2px solid cornflowerblue;
+
+}
+
+.modal-header_down-notice {
+    height: 4.5%;
+    text-align: right;
+    color: #27292C;
+    font-size: 0.6rem;
+}
+
+.modal-body-notice {
+    padding: 2px 16px;
+    font-size: 18px;
+    height: 210px;
+    text-align: left;
+}
+.remove{
+    display: none;
+}
+.none {
+    display: none;
+}
+
+.show {
+    display: block
+}

@@ -18,9 +18,13 @@ public class LoginInterceptor implements HandlerInterceptor {
         urlList.add("/user/login");
         urlList.add("/user/register");
         urlList.add("/user/checkUsername");
+        urlList.add("/user/checkEmail");
+        urlList.add("/user/sendEmail");
+        urlList.add("/user/code");
         urlList.add("/user/registerUser");
         urlList.add("/user/retrievePwd");
         urlList.add("/user/retrieve");
+        urlList.add("/user/revisePwd");
         String URL = request.getServletPath();
         if (user==null && !urlList.contains(URL)) {
             if (URL.equals("/user/registerSuccess")) {

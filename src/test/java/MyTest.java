@@ -3,7 +3,12 @@ import com.alibaba.fastjson.JSONObject;
 import entity.*;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;
 import service.*;
@@ -11,11 +16,14 @@ import utils.Http;
 import utils.RandomDataImpl;
 import utils.Utils;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MyTest {
+
 ////    @Test
 ////    public int[] twoSum(int[] nums, int target) {
 ////        int [] twoSum=new int[2];
@@ -75,8 +83,27 @@ public class MyTest {
 //
 //    }
     @Test
-    public void test(){
-        System.out.println(Utils.address("ip=218.75.178.95"));
+    public void test() throws MessagingException {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserService userService=(UserService)context.getBean("UserServiceImpl");
+        System.out.println(userService.checkEmail("1105878034@qq.com"));
+//        JavaMailSender javaMailSender=(JavaMailSender)context.getBean("javaMailSender");
+//        Utils utils=(Utils)context.getBean("Utils");
+//        User user=new User();
+//        user.setUsername("admin");
+//        utils.email_163(user);
+
+//        SimpleMailMessage message=new SimpleMailMessage();
+//        message.setFrom("1643861077@qq.com");
+//        message.setTo("1105878034@qq.com");
+//        //邮件主题
+//        message.setSubject("邮件的主题");
+//        //邮件内容
+//        message.setText("内容："+"s123s");
+//        //发送邮件
+//        javaMailSender.send(message);
+
+//        System.out.println(Utils.address("ip=218.75.178.95"));
 //        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 //        StaffService  staffService= (StaffService) context.getBean("StaffServiceImpl");
 //        SalaryService  salaryService= (SalaryService) context.getBean("SalaryServiceImpl");

@@ -36,7 +36,7 @@
     <select id="checkUsername" resultType="entity.User" parameterType="java.lang.String">
         select * from user where username=#{username}
     </select>
-    <select id="checkEmail" resultType="java.lang.Boolean" parameterType="java.lang.String">
+    <select id="checkEmail" resultType="entity.User" parameterType="java.lang.String">
         select * from user where email=#{email}
     </select>
 

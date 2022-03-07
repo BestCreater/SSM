@@ -14,6 +14,7 @@ public interface UserService {
     int onlineStatus(User user);
     int updateRole(User user);
     User checkUsername(String username);
+    User checkEmail(String email);
     User retrievePwd(User user);
     int register(User user);
     int deleteUser(int user_id);

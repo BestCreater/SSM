@@ -4,16 +4,24 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import entity.*;
 import eu.bitwalker.useragentutils.UserAgent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 public class Utils {
+    private int code;
+    private Random random=new Random();
+    @Autowired
+    private JavaMailSender javaMailSender;
+
 
     public static String getRegisterDay(String register_time) throws ParseException {//根据date计算天数
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -94,6 +102,9 @@ public class Utils {
         return null;
     }
     public static String address(String ip){
+        if ("0:0:0:0:0:0:0:1".equals(ip)||ip==null){
+            ip="";
+        }
         String address="";
         try {
             String st=Http.sendGet("https://ip.help.bj.cn/","ip="+ip);
@@ -114,5 +125,61 @@ public class Utils {
         }else {
             return userAgent.getBrowser().getName();
         }
+    }
+    /*默认使用163邮箱发送验证码，相应配置文件database.properties
+    若发送失败或出现异常等则使用qq邮箱*/
+    public int email_163(User user) throws MessagingException {
+        MimeMessage message=javaMailSender.createMimeMessage();
+        MimeMessageHelper messageHelper;
+        try {
+            messageHelper= new MimeMessageHelper(message,true);
+            messageHelper.setFrom("getxiaohz@163.com");//发件人
+            messageHelper.setTo(user.getEmail());
+            messageHelper.setSubject("信息管理系统邮箱验证码");
+            code=(random.nextInt(900000)+100000);
+            String text="您好！您的邮箱验证码："+code+",该验证码5分钟内有效。为了保障您的账户安全，请勿向他人泄漏验证码信息。";
+            if (user.getUsername()!=null&&!"".equals(user.getUsername())){
+                text=user.getUsername()+","+text;
+            }
+            messageHelper.setText(text,true);	//true代表支持html格式
+            javaMailSender.send(message);
+        } catch (Exception e) {
+            code=email_qq(user);
+        }
+        return code;
+    }
+
+    public int email_qq(User user) throws MessagingException {
+        try {
+            Properties properties =new Properties();
+            properties.put("mail.smtp.host", "smtp.qq.com");
+            properties.put("mail.smtp.port", "25");
+            properties.put("mail.smtp.auth", "true");
+            Session session = Session.getInstance(properties, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication("1643861077@qq.com","mypjjpewxsqhdefj");
+                }
+            });
+            code=(random.nextInt(900000)+10000);
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("xiao_hz@qq.com"));
+            message.setRecipient(Message.RecipientType.TO,new InternetAddress(user.getEmail()));
+            message.setSubject("信息管理系统邮箱验证码");
+            code=(random.nextInt(900000)+100000);
+            String text="您好！您的邮箱验证码："+code+",该验证码5分钟内有效。为了保障您的账户安全，请勿向他人泄漏验证码信息。";
+            if (user.getUsername()!=null&&!"".equals(user.getUsername())){
+                text=user.getUsername()+","+text;
+            }
+            message.setContent(text,"text/html;charset=UTF-8");
+            Transport.send(message);
+        }catch (MessagingException e){
+            code=0;
+            e.printStackTrace();
+        }
+        return code;
+    }
+    public void test(){
+        System.out.println(123);
     }
 }

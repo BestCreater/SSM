@@ -9,6 +9,7 @@ import java.util.Map;
 public interface UserMapper {
     User login(User user);
     User checkUsername(@Param("username")String username);
+    User checkEmail(@Param("email")String email);
     User retrievePwd(User user);
     int register(User user);
     int revisePwd(User user);
