@@ -28,6 +28,7 @@
     <bean id="SalaryServiceImpl" class="service.SalaryServiceImpl">
         <property name="salaryMapper" ref="salaryMapper"/>
     </bean>
+    <bean id="TestAop" class="aop.TestAop"/>
     <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <!-- 注入数据库连接池 -->

@@ -45,4 +45,16 @@
     <listener>
         <listener-class>listener.SessionCounter</listener-class>
     </listener>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/public/index.html</location>
+    </error-page>
+    <error-page>
+        <error-code>405</error-code>
+        <location>/public/index.html</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/public/index.html</location>
+    </error-page>
 </web-app>
