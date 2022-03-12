@@ -126,7 +126,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>5.1.5.RELEASE</version>
+            <version>5.1.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.4</version>
         </dependency>
     </dependencies>
     <!--    maven资源导出问题-->
