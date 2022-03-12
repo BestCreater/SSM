@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>登录界面</title>
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/webjars/jquery/3.3.1/jquery.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" type="text/css">
 </head>
 <body background="${pageContext.request.contextPath}/img/loginBack.jpg">

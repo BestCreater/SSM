@@ -15,16 +15,17 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         User user = (User) request.getSession().getAttribute("user");
         List<String> urlList = new ArrayList<>();
-        urlList.add("/user/login");
-        urlList.add("/user/register");
-        urlList.add("/user/checkUsername");
-        urlList.add("/user/checkEmail");
-        urlList.add("/user/sendEmail");
-        urlList.add("/user/code");
-        urlList.add("/user/registerUser");
-        urlList.add("/user/retrievePwd");
-        urlList.add("/user/retrieve");
-        urlList.add("/user/revisePwd");
+        urlList.add("/user/login");//登录 POST请求
+        urlList.add("/user/register");//注册页面
+        urlList.add("/user/checkUsername");//注册检查
+        urlList.add("/user/checkEmail");//注册检查
+        urlList.add("/user/sendEmail");//发送邮件验证码 POST请求
+        urlList.add("/user/code");//校验邮件验证码 POST请求
+        urlList.add("/user/registerUser");//注册提交
+        urlList.add("/user/retrievePwd");//找回密码提交
+        urlList.add("/user/retrieve");//忘记密码页面
+        urlList.add("/user/revisePwd");//修改密码提交
+
         String URL = request.getServletPath();
         if (user==null && !urlList.contains(URL)) {
             if (URL.equals("/user/registerSuccess")) {

@@ -24,7 +24,7 @@
 .left-up {
     width: 100%;
     height: 12%;
-    background: #4E92E7;
+    background: #4983BE;
     /*background: #6D88A4;*/
     float: left;
     margin: 0px;
@@ -40,14 +40,14 @@
 .left-down {
     width: 100%;
     height: 88%;
-    background: #202121;
+    background: #424548;
     float: left;
 }
 
 .left-down ul li a {
     padding-left: 25%;
     font-size: 2rem;
-    color: #fefefe;
+    color: #678CB1;
 }
 
 .right {
@@ -60,13 +60,13 @@
 .right-up {
     width: 100%;
     height: 12%;
-    background: #4E92E7;
+    background:#4983BE;
 }
 
 .right-up-up {
     width: 100%;
     height: 70%;
-    background: #4E92E7;
+    background: #4983BE;
 }
 
 .right-up-right {
@@ -129,9 +129,8 @@
 .right-up-down {
     width: 100%;
     height: 30%;
-    background: #4E92E7;
+    background: #4983BE;
 }
-
 .right-up-down-left img {
     width: 2.1%;
     height: 100%;

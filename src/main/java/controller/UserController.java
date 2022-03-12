@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,11 +46,8 @@ public class UserController {
     public String index() {
             return "backstage";
     }
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public String login(User user, Model model, HttpServletRequest req){
-        if ("POST".equalsIgnoreCase(req.getMethod())!=true){
-            return "login";
-        }
         User userLogin=userService.login(user);
         if (userLogin!=null){//通过验证
             if (userLogin.getStatus().equals("off")){//账号封禁
@@ -125,9 +123,6 @@ public class UserController {
     }
     @RequestMapping("/revisePwd")
     public String revisePwd(Model model, User user, HttpServletRequest req){
-        if ("POST".equalsIgnoreCase(req.getMethod())!=true){
-            return "login";
-        }
         if (userService.revisePwd(user)!=0){
             model.addAttribute("username",user.getUsername());
             logout(req.getSession());
@@ -160,12 +155,9 @@ public class UserController {
         return resultMsg.getCheckMsg();
     }
 
-    @RequestMapping("/sendEmail")
+    @PostMapping("/sendEmail")
     @ResponseBody
-    public String sendEmail(HttpServletRequest req,HttpSession session,User user) throws MessagingException {
-        if ("POST".equalsIgnoreCase(req.getMethod())!=true){
-            return null;
-        }
+    public String sendEmail(HttpServletRequest req,HttpSession session,User user) throws Exception {
         int code=utils.email_163(user);
         session.setAttribute("code",code);
         session.setMaxInactiveInterval(60*5);
@@ -175,7 +167,7 @@ public class UserController {
         }
         return resultMsg.trueMsg();
     }
-    @RequestMapping("/registerUser")
+    @PostMapping("/registerUser")
     public String registerUser(User user){
         if (userService.register(user)!=0){
             return "registerSuccess";
@@ -186,7 +178,7 @@ public class UserController {
     public String retrieve(){
         return "retrievePwd";
     }
-    @RequestMapping("/retrievePwd")
+    @PostMapping("/retrievePwd")
     @ResponseBody
     public String retrievePwd(@RequestBody User user){
         resultMsg.falseMsg();
@@ -209,7 +201,7 @@ public class UserController {
         }
         return resultMsg.getMsg();
     }
-    @RequestMapping("/code")
+    @PostMapping("/code")
     @ResponseBody
     public String code(HttpSession session,String code){
         if (session.getAttribute("code")!=null&&((session.getAttribute("code"))).equals(Integer.valueOf(code))){

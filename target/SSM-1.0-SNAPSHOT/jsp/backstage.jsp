@@ -13,7 +13,7 @@
     <title>主页面</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/webjars/jquery/3.3.1/jquery.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/backstage.css" type="text/css">
     <script type="text/javascript">
         $(function () {
@@ -33,25 +33,27 @@
                     src="${pageContext.request.contextPath}/img/logo1.jpg"></a>
         </div>
         <div class="left-down">
-            <ul class="nav nav-pills nav-stacked">
+            <ul class="nav nav-pills nav-stacked" role="tablist">
                 <li onclick="pageChange('员工管理','${pageContext.request.contextPath}/staff/mainStaff')"><a
                         href="${pageContext.request.contextPath}/staff/mainStaff"
-                        target="content">员工管理</a></li>
+                        target="content"><img src="${pageContext.request.contextPath}/img/staff.png"style="width: 15%;height: 2.6%;">&nbsp;员工管理</a></li>
                 <li onclick="pageChange('薪酬管理','${pageContext.request.contextPath}/salary/mainSalary')"><a
                         href="${pageContext.request.contextPath}/salary/mainSalary"
-                        target="content">薪酬管理</a></li>
+                        target="content"><img src="${pageContext.request.contextPath}/img/salary.png"style="width: 15%;height: 2.6%;">&nbsp;薪酬管理</a></li>
                 <li class="user" style="display: none"
                     onclick="pageChange('用户管理','${pageContext.request.contextPath}/user/mainUser')"><a
                         href="${pageContext.request.contextPath}/user/mainUser"
-                        target="content">用户管理</a></li>
+                        target="content"><img src="${pageContext.request.contextPath}/img/users.png"style="width: 15%;height: 2.6%;">&nbsp;用户管理</a></li>
                 <li onclick="pageChange('登录日志','${pageContext.request.contextPath}/log/mainLog')"><a
-                        href="${pageContext.request.contextPath}/log/mainLog" target="content">登录日志</a>
+                        href="${pageContext.request.contextPath}/log/mainLog"
+                        target="content"><img src="${pageContext.request.contextPath}/img/log.png"style="width: 15%;height: 2.6%;">&nbsp;登录日志</a>
                 </li>
                 <li onclick="pageChange('通知管理','${pageContext.request.contextPath}/notice/mainNotice')"><a
                         href="${pageContext.request.contextPath}/notice/mainNotice"
-                        target="content">通知管理</a></li>
+                        target="content"><img src="${pageContext.request.contextPath}/img/notice.png"style="width: 15%;height: 2.6%;">&nbsp;通知管理</a></li>
                 <li onclick="pageChange('文件管理','${pageContext.request.contextPath}/file/mainFile')"><a
-                        href="${pageContext.request.contextPath}/file/mainFile" target="content">文件管理</a>
+                        href="${pageContext.request.contextPath}/file/mainFile"
+                        target="content"><img src="${pageContext.request.contextPath}/img/file.png"style="width: 15%;height: 2.6%;">&nbsp;文件管理</a>
                 </li>
             </ul>
         </div>
@@ -75,10 +77,10 @@
 
             <div class="right-up-down">
                 <div class="right-up-down-left" style="height: 100%;width: 70%;float: left;">
-                    <ul style="height: 100%;font-size: 1.5rem;background: #4E92E7" id="kiu" class="breadcrumb">
-                        <a href="${pageContext.request.contextPath}/backstage.jsp"><img
+                    <ul style="height: 100%;font-size: 1.5rem;background: #4983BE" id="kiu" class="breadcrumb">
+                        <a href="${pageContext.request.contextPath}/user/index"><img
                                 src="${pageContext.request.contextPath}/img/homepage.png"></a>
-                        <li><a href="${pageContext.request.contextPath}/backstage.jsp" style="color:#0F0F10;">首页</a>
+                        <li><a href="${pageContext.request.contextPath}/user/index" style="color:#0F0F10;">首页</a>
                         </li>
                     </ul>
                 </div>
@@ -101,6 +103,14 @@
         </div>
     </div>
 </div>
+<style>
+    .nav .nav-divider {
+        height: 1px;
+        margin: 9px 0;
+        overflow: hidden;
+        background-color: #e5e5e5;
+    }
+</style>
 <script type="text/javascript">
 
     function pageChange(value, href) {
@@ -129,7 +139,7 @@
                             url: "${pageContext.request.contextPath}/user/cancel",
                             dataType: "text",
                             success: function (data) {
-                                alert(data);
+                                alert("注销成功,"+data);
                                 exit();
                             }
                         });

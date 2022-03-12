@@ -128,7 +128,7 @@ public class Utils {
     }
     /*默认使用163邮箱发送验证码，相应配置文件database.properties
     若发送失败或出现异常等则使用qq邮箱*/
-    public int email_163(User user) throws MessagingException {
+    public int email_163(User user) throws Exception {
         MimeMessage message=javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper;
         try {
@@ -149,7 +149,7 @@ public class Utils {
         return code;
     }
 
-    public int email_qq(User user) throws MessagingException {
+    public int email_qq(User user) throws Exception {
         try {
             Properties properties =new Properties();
             properties.put("mail.smtp.host", "smtp.qq.com");
@@ -173,7 +173,7 @@ public class Utils {
             }
             message.setContent(text,"text/html;charset=UTF-8");
             Transport.send(message);
-        }catch (MessagingException e){
+        }catch (Exception e){
             code=0;
             e.printStackTrace();
         }
