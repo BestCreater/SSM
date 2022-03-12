@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/webjars/jquery/3.3.1/jquery.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css" type="text/css">
 </head>
 <body background="${pageContext.request.contextPath}/img/back_01.jpg" style=" background-repeat:no-repeat ;background-size:100% 100%;

@@ -50,7 +50,8 @@
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.2" />
           <element id="library" level="project" name="Maven: javax.mail:mail:1.4.7" />
           <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:5.1.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:5.1.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.9.4" />
         </element>
       </element>
       <element id="directory" name="META-INF">

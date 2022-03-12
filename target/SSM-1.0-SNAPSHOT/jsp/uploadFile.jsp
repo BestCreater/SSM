@@ -12,7 +12,7 @@
     <title></title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/webjars/jquery/3.3.1/jquery.js"></script>
 </head>
 <style>
     .myForm {

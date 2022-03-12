@@ -9,6 +9,7 @@ entity\LogLogin.class
 controller\FileController.class
 dao\LogMapper.class
 utils\RandomData.class
+utils\Utils$1.class
 service\StaffService.class
 dao\FileMapper.class
 interceptor\LoginInterceptor.class

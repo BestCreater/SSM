@@ -20,7 +20,7 @@
     <div class="middle">
         <img src="${pageContext.request.contextPath}/img/success.jpg"><br>
         <span style="padding-left:6% ">${user.username},注册成功！</span><br>
-        <a href="${pageContext.request.contextPath}/user/login">
+        <a href="${pageContext.request.contextPath}/">
             <button type="button" class="btn btn-default btn-lg" style="padding-right: 20%;width: 36%">立即登录</button>
         </a>
         <div class="accordion">
@@ -31,7 +31,7 @@
 <script type="text/javascript">
     var time = 9; //时间,秒
     function Redirect() {
-        window.location.href = "${pageContext.request.contextPath}/user/login";
+        window.location.href = "${pageContext.request.contextPath}/";
     }
 
     var i = 0;

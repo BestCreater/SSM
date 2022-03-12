@@ -1,7 +1,9 @@
 
+import aop.TestAop;
 import com.alibaba.fastjson.JSONObject;
 import entity.*;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +25,13 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MyTest {
+    public static void main(String[] args) {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserService userService = (UserService) context.getBean("UserServiceImpl");
 
+        FileService fileService=(FileService) context.getBean("FileServiceImpl");
+        System.out.println(userService.userInfo("Admin", 1));
+    }
 ////    @Test
 ////    public int[] twoSum(int[] nums, int target) {
 ////        int [] twoSum=new int[2];
@@ -227,12 +235,7 @@ public class MyTest {
     }
     @Test
     public void testsd() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        UserService userService = (UserService) context.getBean("UserServiceImpl");
-        FileService fileService=(FileService) context.getBean("FileServiceImpl");
-        for (FileOperation fileOperation:fileService.fileInfo("super",1)) {
-            System.out.println(fileOperation);
-        }
+
     }
 //        StaffService staffService=(StaffService)context.getBean("StaffServiceImpl");
 //        LogService logService=(LogService)context.getBean("LogServiceImpl");
