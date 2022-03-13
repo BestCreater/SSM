@@ -94,7 +94,7 @@ public class UserController {
         model.addAttribute("page",page);
         return "user";
     }
-    @RequestMapping("/updateUser")
+    @PostMapping("/updateUser")
     @ResponseBody
     public String updateUser(int user_id,String status){
         resultMsg.falseMsg();
@@ -103,7 +103,7 @@ public class UserController {
         }
         return resultMsg.getMsg();
     }
-    @RequestMapping("/updateRole")
+    @PostMapping("/updateRole")
     @ResponseBody
     public String updateRole(@RequestBody User user){
         resultMsg.falseMsg();
