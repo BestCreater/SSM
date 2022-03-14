@@ -12,7 +12,6 @@ utils\RandomData.class
 utils\Utils$1.class
 service\StaffService.class
 dao\FileMapper.class
-interceptor\LoginInterceptor.class
 controller\LogController.class
 controller\StaffController.class
 dao\UserMapper.class
@@ -26,7 +25,6 @@ service\UserService.class
 dao\SalaryMapper.class
 service\NoticeServiceImpl.class
 service\SalaryService.class
-service\UserServiceImpl.class
 utils\Http.class
 service\FileService.class
 controller\NoticeController.class

@@ -166,7 +166,7 @@
             alert('没有操作权限！');
             if (switchAnim.checked==true){switchAnim.checked=false;}
             else {switchAnim.checked=true};            r
-            eturn;
+            return;
         }
         if(role=="超级管理员"){
             alert("不能禁用超级管理员！");
