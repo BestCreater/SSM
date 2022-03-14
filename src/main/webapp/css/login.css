@@ -2,14 +2,15 @@ body{
     background-repeat:no-repeat ;
     background-size:100% 100%;
     background-attachment: fixed;
+    margin: 0px;
 }
 .content {
     padding: 0 auto;
     margin: 0 auto;
-    height: 450px;
+    height: 70%;
     width: 100%;
-    background-size: 100% 450px;
-    margin-top: 25px;
+    background-size: 100%
+    /*margin-top: 25px;*/
 }
 
 .login-wrap {
@@ -19,7 +20,7 @@ body{
     border-radius: 10px;
     -webkit-border-radius: 10px;
     right: 40%;
-    margin-top: 13%;
+    margin-top: 14.7%;
     background: gold;
     background-size: 100%;
 }
@@ -85,4 +86,15 @@ input:active {
     padding-top: 10px;
     clear: both;
     font-weight: bold;
+}
+.footer{
+    background: #C0C6C6;
+    height: 3.5%;
+    background:rgba(200, 210, 204, 0.8);
+    width:100%;
+}
+.footer p{
+    text-align:center;
+    font-size: 1rem;
+    color: #3E3F40;
 }

@@ -28,12 +28,17 @@
             </div>
         </form>
         <div class="login-wrap-down">
-            <a href="${pageContext.request.contextPath}/user/register">注册账号</a>
-            <a href="${pageContext.request.contextPath}/user/retrieve" style="padding-left: 62px;">忘记密码?</a>
+            <a href="${pageContext.request.contextPath}/user/register" style="text-decoration: none">注册账号</a>
+            <a href="${pageContext.request.contextPath}/user/retrieve" style="padding-left: 62px;text-decoration: none">忘记密码?</a>
         </div>
         <div id="CheckMsg" class="msg" style="text-align: center"><span id="error" style="color: firebrick">${error}</span></div>
     </div>
 </div>
+<div style="height: 24.3%"></div>
+<div class="footer">
+    <p>Copyright2022© 苏格拉没有底 版权所有 <a href="https://beian.miit.gov.cn/#/Integrated/index" style="text-decoration: none">湘ICP备2022003812</a></p>
+</div>
+
 <script type="text/javascript">
     // 回车登录
     $("body").keydown(function () {
