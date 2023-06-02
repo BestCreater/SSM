@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.FileMapper">
+    <!--    分页查询-->
+    <select id="fileInfo" resultType="entity.FileOperation" parameterType="map">
+        select * from `file_operation`,`user` where user.user_id=file_operation.user_id
+        <if test="map.keywords!=null">
+            <bind name="keyword" value="'%'+map.keywords+'%'"/>
+            --         防止sql注入
+            AND (username LIKE #{keyword} OR file_name LIKE #{keyword} OR file_description LIKE #{keyword})
+            AND user.user_id=file_operation.user_id
+        </if>
+        <if test="map.showRow!=null">
+            order by download_amount desc limit #{map.showRow},10
+        </if>
+    </select>
+
+    <!--    统计记录数-->
+    <select id="sumRow" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(*) from `file_operation`,`user` where user.user_id=file_operation.user_id
+        <if test="keywords!=null">
+            <bind name="keyword" value="'%'+keywords+'%'"/>
+            --         防止sql注入
+            AND (user.username LIKE #{keyword} OR `file_name` LIKE #{keyword} OR file_description LIKE #{keyword})
+            AND user.user_id=file_operation.user_id
+        </if>
+    </select>
+    <!--    增-->
+    <insert id="fileUpload" parameterType="FileOperation">
+        insert into file_operation(`file_name`,file_description,user_id,upload_time,path)
+        values (#{file_name},#{file_description},#{user_id},#{upload_time},#{path})
+    </insert>
+    <!--    删-->
+    <update id="removeFile" parameterType="int">
+        delete from file_operation where file_id=#{file_id}
+    </update>
+    <!--    改-->
+    <update id="downloadAmount" parameterType="int">
+        UPDATE  file_operation SET download_amount=download_amount+1
+        where file_id =#{file_id}
+    </update>
+    <select id="fileDownload" resultType="entity.FileOperation" parameterType="int">
+        select path,file_name from file_operation where file_id=${file_id}
+    </select>
+</mapper>
