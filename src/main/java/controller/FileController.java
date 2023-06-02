@@ -28,7 +28,6 @@ public class FileController {
     private static List<FileOperation> fileList=new ArrayList<>();
     private static ResultMsg resultMsg=new ResultMsg();
     @Autowired
-    @Qualifier("FileServiceImpl")
     private FileServiceImpl fileService;
 
     @RequestMapping("/mainFile")
@@ -96,7 +95,6 @@ public class FileController {
         if (file.exists()&&file.delete()&&fileService.removeFile(fileOperation.getFile_id())!=0){
             resultMsg.trueMsg();
         }
-        System.out.println(resultMsg.getMsg());
         return resultMsg.getMsg();
     }
 }

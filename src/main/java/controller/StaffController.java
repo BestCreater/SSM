@@ -24,7 +24,6 @@ public class StaffController {
     private static List<Staff> staffList=new ArrayList<>();
     private ResultMsg resultMsg=new ResultMsg();
     @Autowired
-    @Qualifier("StaffServiceImpl")
     private StaffService staffService;
     @RequestMapping("/mainStaff")
     public String mainStaff(Model model){
@@ -54,7 +53,7 @@ public class StaffController {
     }
     @RequestMapping("/addStaff")
     @ResponseBody
-    public String addStaff(Staff staff){
+    public String addStaff(Staff staff) throws Exception {
         resultMsg.falseMsg();
         if (staffService.addStaff(staff)!=0){
             resultMsg.trueMsg();

@@ -4,6 +4,7 @@ import dao.NoticeMapper;
 import dao.UserMapper;
 import entity.Notice;
 import entity.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.Utils;
 
@@ -12,12 +13,13 @@ import java.util.List;
 import java.util.Map;
 @Service
 public class NoticeServiceImpl implements NoticeService {
+    @Autowired
     private NoticeMapper noticeMapper;
 
 
-    public void setNoticeMapper(NoticeMapper noticeMapper) {
-        this.noticeMapper = noticeMapper;
-    }
+//    public void setNoticeMapper(NoticeMapper noticeMapper) {
+//        this.noticeMapper = noticeMapper;
+//    }
     @Override
     public List<Notice> noticeInfo(String keywords, Integer nowPage) {
         Map<String,Object> map=new HashMap<>();

@@ -8,6 +8,7 @@ import entity.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import utils.Utils;
 
 import javax.annotation.Resource;
@@ -15,17 +16,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 @Service
+@Transactional
 public class StaffServiceImpl implements StaffService{
-    private StaffMapper staffMapper;
-    private SalaryService salaryService;
-    public void setStaffMapper(StaffMapper staffMapper){
-        this.staffMapper=staffMapper;
-    }
     @Autowired
-    @Qualifier("SalaryServiceImpl")
-    public void setSalaryService(SalaryService salaryService){
-        this.salaryService=salaryService;
-    }
+    private StaffMapper staffMapper;
+//    public void setStaffMapper(StaffMapper staffMapper){
+//        this.staffMapper=staffMapper;
+//    }
+    @Autowired
+    private SalaryService salaryService;
+
+//    @Qualifier("SalaryServiceImpl")
+//    public void setSalaryService(SalaryService salaryService){
+//        this.salaryService=salaryService;
+//    }
 
     @Override
     public List<Staff> staffInfo(String keywords, Integer nowPage) {
@@ -50,16 +54,21 @@ public class StaffServiceImpl implements StaffService{
     }
 
     @Override
-    public int addStaff(Staff staff) {
-        int row=this.staffMapper.addStaff(staff);
-        if (row!=0){
-            Department department=salaryService.deptInfo(staff.getDepartment());
-            Salary salary=Utils.getPersonalSalary(staff,department);
-            if (salaryService.addSalary(salary)==0){
-                deleteStaff(staff.getStaff_id());
-                row=0;
+    @Transactional(rollbackFor = Exception.class)
+    public int addStaff(Staff staff) throws Exception {
+        int row=0;
+        try {
+            row=this.staffMapper.addStaff(staff);
+            if (row!=0){
+                Department department=salaryService.deptInfo(staff.getDepartment());
+                Salary salary=Utils.getPersonalSalary(staff,department);
+                row=salaryService.addSalary(salary);
             }
+        }catch (Exception e){
+            throw new Exception("添加异常");
         }
+
+
         return row;
     }
 

@@ -80,6 +80,7 @@
       <th>浏览器</th>
       <th>登录IP</th>
       <th>登录地址</th>
+      <th>登录状态</th>
     </tr>
     </thead>
     <tbody id="content">
@@ -92,6 +93,7 @@
         <td>${log.browser_type}</td>
         <td>${log.ip_address}</td>
         <td>${log.login_address}</td>
+        <td>${log.state}</td>
       </tr>
     </c:forEach>
     </tbody>

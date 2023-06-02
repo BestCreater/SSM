@@ -30,6 +30,7 @@ public class Http {
             // 设置通用的请求属性
             connection.setRequestProperty("accept", "*/*");
             connection.setRequestProperty("connection", "Keep-Alive");
+            connection.setRequestProperty("Cookie", "s_tech_state=730c2a5dfa98427c836d5c64fa2c7801; s_tech_sid=emp-1b0cdfff2f524e61b3dce46636bfdcfa; s_tech_dept_id=655927308");
             connection.setRequestProperty("user-agent",
                     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             // 建立实际的连接

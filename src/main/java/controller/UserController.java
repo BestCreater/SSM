@@ -35,13 +35,13 @@ public class UserController {
     private static Map<String,Object> onlineUser= SessionCounter.onlineUser;
     private static ResultMsg resultMsg =new ResultMsg();
     @Autowired
-    @Qualifier("UserServiceImpl")
+//    @Qualifier("UserServiceImpl")
     private UserService userService;
     @Autowired
     private Utils utils;
-    @Autowired
-    @Qualifier("LogServiceImpl")
-    private LogService logService;
+//    @Autowired
+//    @Qualifier("LogServiceImpl")
+//    private LogService logService;
     @RequestMapping("/index")
     public String index() {
             return "backstage";
@@ -58,9 +58,6 @@ public class UserController {
             req.getSession().setMaxInactiveInterval(24*60*60);
             onlineUser.put(req.getSession().getId(),((User)req.getSession().
                     getAttribute("user")).getUsername());
-            logService.addLogLogin(new LogLogin(0,null,userLogin.getUser_id(),
-                    req.getSession().getId(),new Timestamp(new Date().getTime()), req.getRemoteAddr(),
-                    utils.address(req.getRemoteAddr()),Utils.getBrowser(req.getHeader("User-Agent"))));
             return "redirect:/user/index";
         }
         model.addAttribute("error","账号或密码错误！");//未通过验证
@@ -154,7 +151,6 @@ public class UserController {
         }
         return resultMsg.getCheckMsg();
     }
-
     @PostMapping("/sendEmail")
     @ResponseBody
     public String sendEmail(HttpServletRequest req,HttpSession session,User user) throws Exception {
@@ -195,6 +191,7 @@ public class UserController {
     @RequestMapping("/cancel")
     @ResponseBody
     public String cancel(int user_id){
+        if (user_id==1)return resultMsg.falseMsg();
         resultMsg.falseMsg();
         if (userService.deleteUser(user_id)!=0){
             resultMsg.cancelMsg();

@@ -4,6 +4,7 @@ package service;
 import dao.UserMapper;
 import entity.Page;
 import entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.Utils;
 
@@ -18,12 +19,12 @@ import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
+    @Autowired
     private UserMapper userMapper;
 
-
-    public void setUserMapper(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
+//    public void setUserMapper(UserMapper userMapper) {
+//        this.userMapper = userMapper;
+//    }
 
     @Override
     public List<User> userInfo(String keywords, Integer nowPage) {

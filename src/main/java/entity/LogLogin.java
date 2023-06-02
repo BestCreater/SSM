@@ -28,4 +28,6 @@ public class LogLogin {
 
     private String login_address;
     private String browser_type;
+
+    private String state;
 }

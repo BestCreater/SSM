@@ -107,11 +107,15 @@ public class Utils {
         }
         String address="";
         try {
-            String st=Http.sendGet("https://ip.help.bj.cn/","ip="+ip);
+//            String st=Http.sendGet("https://ip.help.bj.cn/","ip="+ip);
+            String st=Http.sendGet("https://67ip.cn/check","ip="+ip+"&token=08dbc7d7ab7a8b6afd24f133e950c0ed");
             Map<String,Object> ads= JSONObject.parseObject(st);
-            JSONArray jsonArray=(JSONArray) ads.get("data");
-            JSONObject data=jsonArray.getJSONObject(0);
+            JSONObject data=(JSONObject) ads.get("data");
+//            JSONObject data=jsonArray.getJSONObject(0);
             address=data.get("province").toString()+data.get("city").toString();
+            if ("".equals(address)){
+                address=data.get("country").toString();
+            }
         }catch (Exception e){
             address="未知";
         }

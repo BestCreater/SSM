@@ -4,16 +4,18 @@ import dao.LogMapper;
 import dao.UserMapper;
 import entity.LogLogin;
 import entity.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LogServiceImpl implements LogService{
+    @Autowired
     private LogMapper logMapper;
-    public void setLogMapper(LogMapper logMapper) {
-        this.logMapper=logMapper;
-    }
+//    public void setLogMapper(LogMapper logMapper) {
+//        this.logMapper=logMapper;
+//    }
     @Override
     public List<LogLogin> logInfo(String keywords, Integer nowPage) {
         Map<String,Object> map=new HashMap<>();

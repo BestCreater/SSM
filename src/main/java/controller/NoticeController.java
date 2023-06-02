@@ -27,7 +27,7 @@ public class NoticeController{
     private static List<Notice> noticeList=new ArrayList<>();
     private static ResultMsg resultMsg =new ResultMsg();
     @Autowired
-    @Qualifier("NoticeServiceImpl")
+//    @Qualifier("NoticeServiceImpl")
     private NoticeService noticeService;
     @RequestMapping("/mainNotice")
     public String mainNotice(Model model){

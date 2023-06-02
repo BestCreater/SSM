@@ -19,7 +19,7 @@ public class SalaryController {
     private static List<Salary> salaryList=new ArrayList<>();
     private ResultMsg resultMsg=new ResultMsg();
     @Autowired
-    @Qualifier("SalaryServiceImpl")
+//    @Qualifier("SalaryServiceImpl")
     private SalaryService salaryService;
     @RequestMapping("/mainSalary")
     public String mainSalary(Model model){

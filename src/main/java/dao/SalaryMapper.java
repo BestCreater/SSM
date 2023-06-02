@@ -2,11 +2,14 @@ package dao;
 
 import entity.Department;
 import entity.Salary;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-
+@Mapper
+@Repository
 public interface SalaryMapper {
     Department deptInfo(String department);//部门定薪表查询(部门定薪)
     List<Salary> deptSalary(@Param("department")String department);//工资表全表扫描（仅修改部门定薪表时调用）

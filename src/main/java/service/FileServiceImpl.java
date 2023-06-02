@@ -3,6 +3,7 @@ package service;
 import dao.FileMapper;
 import entity.FileOperation;
 import entity.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -10,10 +11,11 @@ import java.util.List;
 import java.util.Map;
 @Service
 public class FileServiceImpl implements FileService{
+    @Autowired
     private FileMapper fileMapper;
-    public void setFileMapper(FileMapper fileMapper){
-        this.fileMapper=fileMapper;
-    }
+//    public void setFileMapper(FileMapper fileMapper){
+//        this.fileMapper=fileMapper;
+//    }
     @Override
     public List<FileOperation> fileInfo(String keywords, Integer nowPage) {
         Map<String,Object> map=new HashMap<>();

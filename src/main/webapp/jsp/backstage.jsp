@@ -123,6 +123,10 @@
     }
 
     function logoff() {
+        if('${sessionScope.user.role_id==0}'){
+            alert("不能注销超级管理员！");
+            return;
+        }
         $.ajax({
             type: "POST",
             data:{"register_time":'${sessionScope.user.register_time}'},

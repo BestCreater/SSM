@@ -4,6 +4,7 @@ import dao.SalaryMapper;
 import entity.Department;
 import entity.Page;
 import entity.Salary;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.Utils;
 
@@ -13,11 +14,12 @@ import java.util.Map;
 
 @Service
 public class SalaryServiceImpl implements SalaryService {
+    @Autowired
     private SalaryMapper salaryMapper;
 
-    public void setSalaryMapper(SalaryMapper salaryMapper){
-        this.salaryMapper=salaryMapper;
-    }
+//    public void setSalaryMapper(SalaryMapper salaryMapper){
+//        this.salaryMapper=salaryMapper;
+//    }
     @Override
     public Department deptInfo(String department) {
         return this.salaryMapper.deptInfo(department);

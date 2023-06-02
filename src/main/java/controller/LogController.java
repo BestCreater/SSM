@@ -19,7 +19,7 @@ public class LogController {
     private static Page page =new Page();
     private static List<LogLogin> logList=new ArrayList<>();
     @Autowired
-    @Qualifier("LogServiceImpl")
+//    @Qualifier("LogServiceImpl")
     private LogService logService;
 
     @RequestMapping("/mainLog")

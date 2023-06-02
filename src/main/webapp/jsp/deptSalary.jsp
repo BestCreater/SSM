@@ -17,12 +17,12 @@
 <body style="padding: 0;margin: 0">
 <div class="main">
     <div class="content">
-        <ul class="nav nav-tabs" style="width: 19%;background: #C0C4CC;padding-left: 3.1%;">
+        <ul class="nav nav-tabs" style="width: 25%;background: #C0C4CC;padding-left: 3.1%;">
             <li><a href="javascript:deptSalary(1)">管理部</a></li>
             <li><a href="javascript:deptSalary(2)">研发部</a></li>
             <li><a href="javascript:deptSalary(3)">实习部</a></li>
         </ul>
-        <br><h4 style="padding-left: 5%">${dept.department}薪资标准</h4><br>
+        <br><h4 style="padding-left: 7%">${dept.department}薪资标准</h4><br>
         <div id="manage" class="manage">
             <form class="form-inline">
                 <label for="salary">基本工资:</label>

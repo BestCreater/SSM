@@ -349,6 +349,7 @@
             $('#error').html("请输入有效等级！");
             return;
         } else {
+            console.log("staff_id:"+u_id+"name:"+ u_name+"sex:"+ u_sex+"department:"+ u_dept+"rank:"+ u_rank)
             $.ajax({
                 type: "POST",
                 dataType: "text",

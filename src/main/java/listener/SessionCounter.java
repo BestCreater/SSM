@@ -28,7 +28,7 @@ public class SessionCounter implements HttpSessionListener {
     public void  sessionDestroyed(HttpSessionEvent se){
         //Spring注解无法注入Session监听器解决办法
         ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
-        UserService userService = (UserService) context.getBean("UserServiceImpl"); // 填写要注入的类,注意第一个字母小写
+        UserService userService = (UserService) context.getBean("userServiceImpl"); // 填写要注入的类,注意第一个字母小写
         User user=(User) se.getSession().getAttribute("user");
         if(user!=null){
             onlineUser.remove(se.getSession().getId());

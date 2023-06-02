@@ -80,7 +80,7 @@
             <button type="button" class="btn btn-default btn-sm" onclick="paging(2)">上一页</button>
             <button type="button" class="btn btn-default btn-sm" onclick="paging(3)">下一页</button>
             <button type="button" class="btn btn-default btn-sm" onclick="paging(4)">尾页</button>
-            &nbsp;${page.nowPage}/${sessionScope.page.sumPage}
+            &nbsp;${page.nowPage}/${page.sumPage}
             共：${page.countRow}&nbsp;条记录
         </div>
     </div>

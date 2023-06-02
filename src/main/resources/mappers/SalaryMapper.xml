@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.SalaryMapper">
+    <select id="deptInfo" resultType="entity.Department" parameterType="java.lang.String">
+        select * from department where department =#{department}
+    </select>
+
+    <select id="deptSalary" resultType="entity.Salary" parameterType="java.lang.String">
+        select * from salary,staff where staff.department = #{department}
+        and staff.staff_id=salary.staff_id
+    </select>
+
+    <!--    分页查询-->
+    <select id="salaryInfo" resultType="entity.Salary" parameterType="map">
+        select * from salary,staff where salary.staff_id=staff.staff_id
+        <if test="map.keywords!=null">
+            <bind name="keywords" value="'%'+map.keywords+'%'"/>
+            --         防止sql注入
+            AND (`name` LIKE #{keywords} OR department LIKE #{keywords} OR salary.staff_id LIKE #{keywords})
+            AND salary.staff_id=staff.staff_id
+        </if>
+        <if test="map.showRow!=null">
+            order by annual desc limit #{map.showRow},10
+        </if>
+    </select>
+
+    <!--    统计记录数-->
+    <select id="sumRow" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(*) from salary,staff where salary.staff_id=staff.staff_id
+        <if test="keywords!=null">
+            <bind name="keyword" value="'%'+keywords+'%'"/>
+            --         防止sql注入
+            AND (`name` LIKE #{keyword} OR department LIKE #{keyword} OR salary.staff_id LIKE #{keyword})
+            AND salary.staff_id=staff.staff_id
+        </if>
+    </select>
+
+    <insert id="addSalary" parameterType="Salary">
+        insert into salary(staff_id,salary,subsidy,bonus,annual)
+        values (#{staff_id},#{salary},#{subsidy},#{bonus},#{annual})
+    </insert>
+
+    <update id="updateSalary" parameterType="Salary">
+        update salary set salary=#{salary}, subsidy=#{subsidy},bonus=#{bonus},annual=#{annual}
+        where staff_id=#{staff_id}
+    </update>
+
+    <update id="updateAllSalary" parameterType="java.util.List">
+        update salary
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="salary =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when staff_id=#{item.staff_id} then #{item.salary}
+                </foreach>
+            </trim>
+            <trim prefix="subsidy =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when staff_id=#{item.staff_id} then #{item.subsidy}
+                </foreach>
+            </trim>
+            <trim prefix="bonus =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when staff_id=#{item.staff_id} then #{item.bonus}
+                </foreach>
+            </trim>
+            <trim prefix="annual =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when staff_id=#{item.staff_id} then #{item.annual}
+                </foreach>
+            </trim>
+        </trim>
+        where staff_id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.staff_id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+
+    <update id="updateDeptSalary" parameterType="Department">
+        update department set base_salary=#{base_salary},
+        base_subsidy=#{base_subsidy},base_bonus=#{base_bonus},base_annual=#{base_annual}
+        where department=#{department}
+    </update>
+</mapper>
