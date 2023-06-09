@@ -30,7 +30,7 @@
     <div class="left">
         <div class="left-up">
             <a href="${pageContext.request.contextPath}/user/index"><img
-                    src="${pageContext.request.contextPath}/img/logo1.jpg"></a>
+                    src="${pageContext.request.contextPath}/img/logo1.png"></a>
         </div>
         <div class="left-down">
             <ul class="nav nav-pills nav-stacked" role="tablist">
